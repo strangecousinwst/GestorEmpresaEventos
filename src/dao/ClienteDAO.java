@@ -2,7 +2,6 @@ package dao;
 
 import dto.ClienteDTO;
 import database.ConnectionFactory;
-import exceptions.ExceptionDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-
 
 /**
  *
@@ -114,7 +112,7 @@ public class ClienteDAO {
                 cliente.setId(resultSet.getInt("id"));
                 cliente.setNome(resultSet.getString("nome"));
                 cliente.setEmail(resultSet.getString("email"));
-                cliente.setTelemovel(resultSet.getString("telefone"));
+                cliente.setTelemovel(resultSet.getString("telemovel"));
                 clientes.add(cliente);
             }
         } catch (SQLException e) {

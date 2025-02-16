@@ -4,7 +4,7 @@
  */
 package app;
 
-import gui.Login;
+import gui.LoginGUI;
 
 /**
  *
@@ -23,7 +23,7 @@ public class MainApp {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new LoginGUI().setVisible(true);
             }
         });
     }

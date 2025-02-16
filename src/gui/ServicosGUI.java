@@ -7,6 +7,7 @@ import dao.ServicoDAO;
 import dto.ServicoDTO;
 import dto.ClienteDTO;
 import dto.UtilizadorDTO;
+import enums.EstadoServico;
 import exceptions.ExceptionDAO;
 import java.math.BigDecimal;
 
@@ -25,7 +26,9 @@ public class ServicosGUI extends javax.swing.JPanel {
         initComponents();
         
         loadDataSet();
+        loadCbxClientes();
         clearCampos();
+
     }
     
     public void loadDataSet() {
@@ -39,8 +42,8 @@ public class ServicosGUI extends javax.swing.JPanel {
     
     public void loadSearchData(String texto) {
         try {
-            ProcessoDAO processoDAO = new ProcessoDAO();
-            tblMain.setModel(processoDAO.buildTableModel(processoDAO.getSearchResult(texto)));
+            ServicoDAO servicoDAO = new ServicoDAO();
+            tblMain.setModel(servicoDAO.buildTableModel(servicoDAO.getSearchResult(texto)));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -143,7 +146,7 @@ public class ServicosGUI extends javax.swing.JPanel {
             }
         });
 
-        cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ABERTO", "EM_ANDAMENTO", "CONCLUIDO" }));
+        cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ABERTO", "SEGUIMENTO", "CONCLUIDO", "CANCELADO" }));
 
         lblFiltrar.setText("Filtrar:");
 
@@ -234,27 +237,23 @@ public class ServicosGUI extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         if (tblMain.getSelectedRow() < 0)
-            JOptionPane.showMessageDialog(this, "Por favor selecione um Processo.");
+            JOptionPane.showMessageDialog(this, "Por favor selecione um Serviço.");
         else {
             if (txtDescricao.getText().equals("") || txtPreco.getText().equals("") || cbxEstado.getSelectedItem().equals(null) || cbxCliente.getSelectedItem().equals(null)) {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
             } else {
-                ProcessoDTO processoDTO = new ProcessoDTO();
-                processoDTO.setId((int) tblMain.getValueAt(tblMain.getSelectedRow(), 0));
-                // sacar o id do serviço que esta na combobox
-                ServicoDTO servicoDTO = (ServicoDTO) cbxCliente.getSelectedItem();
-                if (servicoDTO != null) {
-                    processoDTO.setIdServico(servicoDTO.getId());
+                ServicoDTO servicoDTO = new ServicoDTO();
+                servicoDTO.setId((int) tblMain.getValueAt(tblMain.getSelectedRow(), 0));
+                // sacar o id do cliente que esta na combobox
+                ClienteDTO clienteDTO = (ClienteDTO) cbxCliente.getSelectedItem();
+                if (clienteDTO != null) {
+                    servicoDTO.setIdCliente(clienteDTO.getId());
                 }
                 
-                UtilizadorDTO funcionarioDTO = (UtilizadorDTO) cbxEstado.getSelectedItem();
-                if (funcionarioDTO != null) {
-                    processoDTO.setIdFuncionario(funcionarioDTO.getId());
-                }
-                
-                processoDTO.setDescricao(txtDescricao.getText());
-                processoDTO.setCusto(BigDecimal.valueOf(Double.parseDouble(txtPreco.getText().replace(",", "."))));
-                new ProcessoDAO().editarProcessoDAO(processoDTO);
+                servicoDTO.setDescricao(txtDescricao.getText());
+                servicoDTO.setEstadoServico(EstadoServico.valueOf(cbxEstado.getSelectedItem().toString()));
+                servicoDTO.setPreco(BigDecimal.valueOf(Double.parseDouble(txtPreco.getText().replace(",", "."))));
+                new ServicoDAO().editarServicoDAO(servicoDTO);
                 loadDataSet();
                 clearCampos();
             }
@@ -265,21 +264,18 @@ public class ServicosGUI extends javax.swing.JPanel {
         if (txtDescricao.getText().equals("") || txtPreco.getText().equals("") || cbxEstado.getSelectedItem().equals(null) || cbxCliente.getSelectedItem().equals(null)) {
             JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos."); 
         } else {
-            ProcessoDTO processoDTO = new ProcessoDTO();
-            // sacar o id do serviço que esta na combobox
-            ServicoDTO servicoDTO = (ServicoDTO) cbxCliente.getSelectedItem();
-            if (servicoDTO != null) {
-                processoDTO.setIdServico(servicoDTO.getId());
+            ServicoDTO servicoDTO = new ServicoDTO();
+            // sacar o id do cliente que esta na combobox
+            ClienteDTO clienteDTO = (ClienteDTO) cbxCliente.getSelectedItem();
+            if (clienteDTO != null) {
+                servicoDTO.setIdCliente(clienteDTO.getId());
             }
             
-            UtilizadorDTO funcionarioDTO = (UtilizadorDTO) cbxEstado.getSelectedItem();
-            if (funcionarioDTO != null) {
-                processoDTO.setIdFuncionario(funcionarioDTO.getId());
-            }
 
-            processoDTO.setDescricao(txtDescricao.getText());
-            processoDTO.setCusto(BigDecimal.valueOf(Double.parseDouble(txtPreco.getText().replace(",", "."))));
-            new ProcessoDAO().registarProcessoDAO(processoDTO);
+            servicoDTO.setDescricao(txtDescricao.getText());
+            servicoDTO.setEstadoServico(EstadoServico.valueOf(cbxEstado.getSelectedItem().toString()));
+            servicoDTO.setPreco(BigDecimal.valueOf(Double.parseDouble(txtPreco.getText().replace(",", "."))));
+            new ServicoDAO().registarServicoDAO(servicoDTO);
             loadDataSet();
             clearCampos();
         }
@@ -287,15 +283,15 @@ public class ServicosGUI extends javax.swing.JPanel {
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
         if (tblMain.getSelectedRow()<0) {
-            JOptionPane.showMessageDialog(null, "Por favor selecione um Processo.");
+            JOptionPane.showMessageDialog(null, "Por favor selecione um Serviço.");
         } else{
             int opt = JOptionPane.showConfirmDialog(
                     null,
-                    "Tem a certeza que deseja remover este Processo?",
+                    "Tem a certeza que deseja remover este Serviço?",
                     "Confirmation",
                     JOptionPane.YES_NO_OPTION);
             if(opt==JOptionPane.YES_OPTION) {
-                new ProcessoDAO().removerProcessoDAO((int)(tblMain.getValueAt(
+                new ServicoDAO().removerServicoDAO((int)(tblMain.getValueAt(
                         tblMain.getSelectedRow(), 0)));
                 loadDataSet();
                 clearCampos(); 

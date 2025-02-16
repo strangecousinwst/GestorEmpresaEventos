@@ -6,6 +6,7 @@ package enums;
  */
 public enum EstadoServico {
     ABERTO,
-    EM_ANDAMENTO,
-    CONCLUIDO
+    SEGUIMENTO,
+    CONCLUIDO,
+    CANCELADO
 }

@@ -10,14 +10,14 @@ import javax.swing.JOptionPane;
  *
  * @author joao
  */
-public class Login extends javax.swing.JFrame {
+public class LoginGUI extends javax.swing.JFrame {
 
     UtilizadorDTO utilizadorDTO;
     
     /**
      * Creates new form Logine
      */
-    public Login() {
+    public LoginGUI() {
         initComponents();
         
         this.setLocationRelativeTo(null);

@@ -18,18 +18,18 @@ public class ClientesGUI extends javax.swing.JPanel {
     /**
      * Creates new form Utilizadores1
      */
-    public ClientesGUI() throws ExceptionDAO {
+    public ClientesGUI() {
         initComponents();
                 
         loadDataSet();
     }
     
-    public void loadDataSet() throws ExceptionDAO {
+    public void loadDataSet() {
         try {
             ClienteDAO clienteDAO = new ClienteDAO();
             tblMain.setModel(clienteDAO.buildTableModel(clienteDAO.getQueryResult()));
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -227,19 +227,15 @@ public class ClientesGUI extends javax.swing.JPanel {
             if (txtNome.getText().equals("") || txtEmail.getText().equals("") || txtTelemovel.getText().equals("")|| txtLocalidade.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
             } else {
-                try {
-                    ClienteDTO clienteDTO = new ClienteDTO();
-                    clienteDTO.setId((int) tblMain.getValueAt(tblMain.getSelectedRow(), 0));
-                    clienteDTO.setNome(txtNome.getText());
-                    clienteDTO.setEmail(txtEmail.getText());
-                    clienteDTO.setTelemovel(txtTelemovel.getText());
-                    clienteDTO.setLocalidade(txtLocalidade.getText());
-                    new ClienteDAO().editarClienteDAO(clienteDTO);
-                    loadDataSet();
-                    clearCampos();
-                } catch (ExceptionDAO e) {
-                    e.printStackTrace();
-                }
+                ClienteDTO clienteDTO = new ClienteDTO();
+                clienteDTO.setId((int) tblMain.getValueAt(tblMain.getSelectedRow(), 0));
+                clienteDTO.setNome(txtNome.getText());
+                clienteDTO.setEmail(txtEmail.getText());
+                clienteDTO.setTelemovel(txtTelemovel.getText());
+                clienteDTO.setLocalidade(txtLocalidade.getText());
+                new ClienteDAO().editarClienteDAO(clienteDTO);
+                loadDataSet();
+                clearCampos();
             }
         }
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -248,18 +244,14 @@ public class ClientesGUI extends javax.swing.JPanel {
         if (txtNome.getText().equals("") || txtEmail.getText().equals("") || txtTelemovel.getText().equals("")|| txtLocalidade.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
         } else {
-            try {
-                ClienteDTO clienteDTO = new ClienteDTO();
-                clienteDTO.setNome(txtNome.getText());
-                clienteDTO.setEmail(txtEmail.getText());
-                clienteDTO.setTelemovel(txtTelemovel.getText());
-                clienteDTO.setLocalidade(txtLocalidade.getText());
-                new ClienteDAO().registarClienteDAO(clienteDTO);
-                loadDataSet();
-                clearCampos();
-            } catch (ExceptionDAO e) {
-                e.printStackTrace();
-            }
+            ClienteDTO clienteDTO = new ClienteDTO();
+            clienteDTO.setNome(txtNome.getText());
+            clienteDTO.setEmail(txtEmail.getText());
+            clienteDTO.setTelemovel(txtTelemovel.getText());
+            clienteDTO.setLocalidade(txtLocalidade.getText());
+            new ClienteDAO().registarClienteDAO(clienteDTO);
+            loadDataSet();
+            clearCampos();
         }
     }//GEN-LAST:event_btnRegistarActionPerformed
 
@@ -273,14 +265,10 @@ public class ClientesGUI extends javax.swing.JPanel {
                     "Confirmation",
                     JOptionPane.YES_NO_OPTION);
             if(opt==JOptionPane.YES_OPTION) {
-                try {
-                    new ClienteDAO().removerClienteDAO((int)(tblMain.getValueAt(
-                            tblMain.getSelectedRow(), 0)));
-                    loadDataSet();
-                    clearCampos();
-                } catch (ExceptionDAO e) {
-                    e.printStackTrace();
-                }
+                new ClienteDAO().removerClienteDAO((int)(tblMain.getValueAt(
+                        tblMain.getSelectedRow(), 0)));
+                loadDataSet();
+                clearCampos();
             }
         }
     }//GEN-LAST:event_btnApagarActionPerformed
@@ -291,12 +279,9 @@ public class ClientesGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_txtFiltrarKeyReleased
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        try {
+
             clearCampos();
             loadDataSet();
-        } catch (ExceptionDAO e) {
-            e.printStackTrace();
-        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void tblMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMainMouseClicked

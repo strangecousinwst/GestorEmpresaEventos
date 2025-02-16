@@ -27,8 +27,8 @@ public class UtilizadoresGUI extends javax.swing.JPanel {
         try {
             UtilizadorDAO utilizadorDAO = new UtilizadorDAO();
             tblMain.setModel(utilizadorDAO.buildTableModel(utilizadorDAO.getQueryResult()));
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     

@@ -156,8 +156,6 @@ public class HomeGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        pnlMain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
         pnlMainLayout.setHorizontalGroup(
@@ -168,8 +166,6 @@ public class HomeGUI extends javax.swing.JFrame {
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 602, Short.MAX_VALUE)
         );
-
-        pnlOpcoes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         btnHome.setText("Home");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
@@ -236,8 +232,6 @@ public class HomeGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pnlUtilizador.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-
         lblUtilizador.setText("Utilizador");
 
         btnLogout.setText("Logout");
@@ -267,8 +261,6 @@ public class HomeGUI extends javax.swing.JFrame {
                 .addComponent(lblUtilizador)
                 .addContainerGap(9, Short.MAX_VALUE))
         );
-
-        pnlMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         btnMenu.setText("Menu");
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -351,7 +343,7 @@ public class HomeGUI extends javax.swing.JFrame {
                 JOptionPane.YES_NO_OPTION);
         if (opt==JOptionPane.YES_OPTION){
             dispose();
-            Login login = new Login();
+            LoginGUI login = new LoginGUI();
             login.setVisible(true);
         }
     }//GEN-LAST:event_btnLogoutActionPerformed

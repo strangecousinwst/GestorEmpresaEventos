@@ -39,8 +39,72 @@ public class ServicoDAO {
         }
     }
     
+    public void registarServicoDAO(ServicoDTO servicoDTO) {
+        String query = "INSERT INTO servico (id_cliente, descricao, estado, preco) VALUES (?, ?, ?, ?)";
+        try {
+            prepStatement = conn.prepareStatement(query);
+            prepStatement.setInt(1, servicoDTO.getIdCliente());
+            prepStatement.setString(2, servicoDTO.getDescricao());
+            prepStatement.setString(3, servicoDTO.getEstadoServico().toString().toLowerCase().replace("i", "í").replace("_", " "));
+            prepStatement.setBigDecimal(4, servicoDTO.getPreco());
+            prepStatement.executeUpdate();
+            System.out.println("DAO: Servico registado.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
-    public List<ServicoDTO> getServicosDAO() throws ExceptionDAO {
+    
+    public void editarServicoDAO(ServicoDTO servicoDTO) {
+        String query = "UPDATE servico SET id_cliente=?, descricao=?, estado=?, preco=? WHERE id=?";
+        try {
+            prepStatement = conn.prepareStatement(query);
+            prepStatement.setInt(1, servicoDTO.getIdCliente());
+            prepStatement.setString(2, servicoDTO.getDescricao());
+            prepStatement.setString(3, servicoDTO.getEstadoServico().toString().toLowerCase().replace("i", "í").replace("_", " "));
+            prepStatement.setBigDecimal(4, servicoDTO.getPreco());
+            prepStatement.setInt(5, servicoDTO.getId());
+            prepStatement.executeUpdate();
+            System.out.println("DAO: Servico editado.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void removerServicoDAO(int id) {
+        String query = "DELETE FROM servico WHERE id=?";
+        try {
+            prepStatement = conn.prepareStatement(query);
+            prepStatement.setInt(1, id);
+            prepStatement.executeUpdate();
+            System.out.println("DAO: Servico removido.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public ResultSet getSearchResult(String searchText) {
+        try {
+            String query = "SELECT servico.id, cliente.nome AS 'cliente', servico.descricao, servico.estado, servico.preco, servico.criado_em, servico.atualizado_em "
+                    + "FROM servico INNER JOIN cliente ON cliente.id=servico.id_cliente "
+                    + "WHERE servico.id LIKE '%" + searchText 
+                    + "%' OR cliente.nome LIKE '%" + searchText 
+                    + "%' OR servico.descricao LIKE '%" + searchText 
+                    + "%' OR servico.estado LIKE '%" + searchText 
+                    + "%' OR servico.preco LIKE '%" + searchText 
+                    + "%' OR servico.criado_em LIKE '%" + searchText
+                    + "%' OR servico.atualizado_em LIKE '%" + searchText
+                    + "%' ORDER BY servico.id";
+            System.out.println(query);
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+    
+    
+    public List<ServicoDTO> getServicosDAO() {
 
         String query = "SELECT * FROM servico";
         List<ServicoDTO> servicosDTO = new ArrayList<>();
@@ -59,29 +123,7 @@ public class ServicoDAO {
                 servicosDTO.add(servicoDTO);
             }
         } catch (SQLException e) {
-            throw new ExceptionDAO("DAO: Erro ao procurar utilizador: " + e);
-        } finally {
-            try {
-                if (prepStatement != null) {
-                    prepStatement.close();
-                }
-            } catch (SQLException e) {
-                throw new ExceptionDAO("DAO: Erro ao fechar o preparedStatement: " + e);
-            }
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-            } catch (SQLException e) {
-                throw new ExceptionDAO("DAO: Erro ao fechar o resultSet: " + e);
-            }
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                throw new ExceptionDAO("DAO: Erro ao fechar a conexão: " + e);
-            }
+            e.printStackTrace();
         }
         return servicosDTO;
     }
@@ -95,7 +137,7 @@ public class ServicoDAO {
         }
         return resultSet;
     }
-    
+    // metodo para gerar uma tabela
     public DefaultTableModel buildTableModel(ResultSet resultSet) throws SQLException {
         ResultSetMetaData metaData = resultSet.getMetaData();
         int colCount = metaData.getColumnCount();

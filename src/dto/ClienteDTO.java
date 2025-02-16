@@ -30,5 +30,8 @@ public class ClienteDTO {
 
     public String getLocalidade() { return localidade; }
 
-    public void setLocalidade(String localidade) { this.localidade = localidade; }  
+    public void setLocalidade(String localidade) { this.localidade = localidade; }
+
+    @Override
+    public String toString() { return nome; }
 }
