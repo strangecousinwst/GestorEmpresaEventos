@@ -1,12 +1,6 @@
 package dto;
 
-import dao.UtilizadorDAO;
 import enums.TipoUtilizador;
-import exceptions.ExceptionDAO;
-
-
-import java.util.ArrayList;
-
 /**
  *
  * @author efapro01.24
@@ -18,8 +12,6 @@ public class UtilizadorDTO {
     private String email;
     private String password;
     private TipoUtilizador tipoUtilizador;
-
-    // Const, Get Set
     
 	public int getId() { return id; }
 

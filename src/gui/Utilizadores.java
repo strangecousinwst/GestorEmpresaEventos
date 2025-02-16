@@ -7,6 +7,7 @@ package gui;
 import dao.UtilizadorDAO;
 import dto.UtilizadorDTO;
 import enums.TipoUtilizador;
+
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -62,7 +63,7 @@ public class Utilizadores extends javax.swing.JPanel {
 
         jScrollPaneMain = new javax.swing.JScrollPane();
         tblMain = new javax.swing.JTable();
-        jLabelLinhasSelecionadas = new javax.swing.JLabel();
+        lblLinhasSelecionadas = new javax.swing.JLabel();
         txtFiltrar = new javax.swing.JTextField();
         jLabelUtilizador = new javax.swing.JLabel();
         jLabelNome = new javax.swing.JLabel();
@@ -85,7 +86,7 @@ public class Utilizadores extends javax.swing.JPanel {
         });
         jScrollPaneMain.setViewportView(tblMain);
 
-        jLabelLinhasSelecionadas.setText("x de y linhas selecionadas.");
+        lblLinhasSelecionadas.setText("x de y linhas selecionadas.");
 
         txtFiltrar.setText("Filtrar..");
         txtFiltrar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -142,7 +143,7 @@ public class Utilizadores extends javax.swing.JPanel {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelLinhasSelecionadas)
+                        .addComponent(lblLinhasSelecionadas)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,7 +210,7 @@ public class Utilizadores extends javax.swing.JPanel {
                             .addComponent(jButtonApagar)
                             .addComponent(jButtonCancelar))))
                 .addGap(33, 33, 33)
-                .addComponent(jLabelLinhasSelecionadas)
+                .addComponent(lblLinhasSelecionadas)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -299,12 +300,12 @@ public class Utilizadores extends javax.swing.JPanel {
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonRegistar;
     private javax.swing.JLabel jLabelEmail;
-    private javax.swing.JLabel jLabelLinhasSelecionadas;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelPassword;
     private javax.swing.JLabel jLabelTipoUtilizador;
     private javax.swing.JLabel jLabelUtilizador;
     private javax.swing.JScrollPane jScrollPaneMain;
+    private javax.swing.JLabel lblLinhasSelecionadas;
     private javax.swing.JTable tblMain;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFiltrar;

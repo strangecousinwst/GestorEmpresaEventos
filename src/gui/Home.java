@@ -47,11 +47,16 @@ public class Home extends javax.swing.JFrame {
         // pnlMain com o layout em card,
         // permite alterar pelos varios menus
         pnlMain.setLayout(cardlayout);
+        // Painel Bem-Vindo
         JPanel BemVindoPanel = new BemVindo(utilizadorDTO);
         BemVindoPanel.setPreferredSize(pnlMain.getPreferredSize());
         pnlMain.add("Bem-Vindo", BemVindoPanel);
         //pnlMain.add("Serviços", new Servicos());
         //pnlMain.add("Processos", new Processos());
+        // Painel Clientes
+        JPanel ClientesPanel = new Clientes();
+        ClientesPanel.setPreferredSize(pnlMain.getPreferredSize());
+        pnlMain.add("Clientes", ClientesPanel);
         //pnlMain.add("Clientes", new Clientes(username, this));
         pnlMain.add("Utilizadores", new Utilizadores());
         
@@ -72,9 +77,9 @@ public class Home extends javax.swing.JFrame {
 //    public void mostrarProcessos() {
 //        cardlayout.show(pnlMain, "Processos");
 //    }
-//    public void mostrarClientes() {
-//        cardlayout.show(pnlMain, "Clientes");
-//    }
+    public void mostrarClientes() {
+        cardlayout.show(pnlMain, "Clientes");
+    }
     public void mostrarUtilizadores() {
         cardlayout.show(pnlMain, "Utilizadores");
     }
@@ -143,6 +148,11 @@ public class Home extends javax.swing.JFrame {
         });
 
         btnClientes.setText("Clientes");
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlOpcoesLayout = new javax.swing.GroupLayout(pnlOpcoes);
         pnlOpcoes.setLayout(pnlOpcoesLayout);
@@ -291,6 +301,10 @@ public class Home extends javax.swing.JFrame {
             login.setVisible(true);
         }
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        mostrarClientes();
+    }//GEN-LAST:event_btnClientesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

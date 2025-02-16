@@ -14,7 +14,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -63,9 +62,6 @@ public class UtilizadorDAO {
         }
         return utilizadorDTO;
     }
-    
-
-
 
     // Methods to add new user
     public void isUtilizadorDAO(UtilizadorDTO utilizadorDTO) {
@@ -162,17 +158,7 @@ public class UtilizadorDAO {
         return resultSet;
     }
     
-    public ResultSet getSearchResult(String searchText) {
-        try {
-            String query = "SELECT id, nome, email, password, tipo_utilizador FROM utilizador "
-                    + "WHERE id LIKE '%" + searchText + "%' OR email LIKE '%" + searchText + "%' "
-                    + "OR tipo_utilizador LIKE '%" + searchText + "%'";
-            resultSet = statement.executeQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return resultSet;
-    }
+
     
 
     public ResultSet getUtilizadorDAO(int id) {
@@ -247,6 +233,19 @@ public class UtilizadorDAO {
         } catch (SQLException e){
             e.printStackTrace();
         }
+    }
+    
+    
+    public ResultSet getSearchResult(String searchText) {
+        try {
+            String query = "SELECT id, nome, email, password, tipo_utilizador FROM utilizador "
+                    + "WHERE id LIKE '%" + searchText + "%' OR email LIKE '%" + searchText + "%' "
+                    + "OR tipo_utilizador LIKE '%" + searchText + "%'";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
     }
 
     // Method to display data set in tabular form

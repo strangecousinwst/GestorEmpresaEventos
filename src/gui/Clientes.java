@@ -1,8 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package gui;
+
+import dao.ClienteDAO;
+import dto.ClienteDTO;
+
+import java.sql.SQLException;
 
 /**
  *
@@ -15,7 +16,35 @@ public class Clientes extends javax.swing.JPanel {
      */
     public Clientes() {
         initComponents();
+                
+        loadDataSet();
     }
+    
+    public void loadDataSet() {
+        try {
+            ClienteDAO clienteDAO = new ClienteDAO();
+            tblMain.setModel(clienteDAO.buildTableModel(clienteDAO.getQueryResult()));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void loadSearchData(String texto) {
+        try {
+            ClienteDAO clienteDAO = new ClienteDAO();
+            tblMain.setModel(clienteDAO.buildTableModel(clienteDAO.getSearchResult(texto)));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void clearCampos() {
+        txtNome.setText("");
+        txtEmail.setText("");
+        txtTelemovel.setText("");
+        txtLocalidade.setText("");
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,63 +56,66 @@ public class Clientes extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPaneMain = new javax.swing.JScrollPane();
-        jTableMain = new javax.swing.JTable();
-        jLabelLinhasSelecionadas = new javax.swing.JLabel();
-        jTextFieldFzfind = new javax.swing.JTextField();
-        jLabelUtilizador = new javax.swing.JLabel();
-        jLabelNome = new javax.swing.JLabel();
-        jLabelEmail = new javax.swing.JLabel();
-        jLabelPassword = new javax.swing.JLabel();
-        jLabelTipoUtilizador = new javax.swing.JLabel();
-        jTextFieldNome = new javax.swing.JTextField();
-        jTextFieldEmail = new javax.swing.JTextField();
-        jTextFieldPassword = new javax.swing.JTextField();
-        jButtonCancelar = new javax.swing.JButton();
-        jButtonEditar = new javax.swing.JButton();
-        jButtonRegistar = new javax.swing.JButton();
-        jButtonApagar = new javax.swing.JButton();
-        jComboBoxTipoUtilizador = new javax.swing.JComboBox<>();
+        tblMain = new javax.swing.JTable();
+        lblLinhasSelecionadas = new javax.swing.JLabel();
+        txtFiltrar = new javax.swing.JTextField();
+        lblCliente = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        lblTelemovel = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtTelemovel = new javax.swing.JTextField();
+        btnCancelar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnRegistar = new javax.swing.JButton();
+        btnApagar = new javax.swing.JButton();
+        lvlLocalidade = new javax.swing.JLabel();
+        txtLocalidade = new javax.swing.JTextField();
 
-        jScrollPaneMain.setViewportView(jTableMain);
+        jScrollPaneMain.setViewportView(tblMain);
 
-        jLabelLinhasSelecionadas.setText("x de y linhas selecionadas.");
+        lblLinhasSelecionadas.setText("x de y linhas selecionadas.");
 
-        jTextFieldFzfind.setText("Filtrar..");
-
-        jLabelUtilizador.setText("Utilizador");
-
-        jLabelNome.setText("Nome");
-
-        jLabelEmail.setText("Email");
-
-        jLabelPassword.setText("Password");
-
-        jLabelTipoUtilizador.setText("Tipo Utilizador");
-
-        jButtonCancelar.setText("Cancelar");
-
-        jButtonEditar.setText("Editar");
-        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarActionPerformed(evt);
+        txtFiltrar.setText("Filtrar..");
+        txtFiltrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFiltrarKeyReleased(evt);
             }
         });
 
-        jButtonRegistar.setText("Registar");
-        jButtonRegistar.addActionListener(new java.awt.event.ActionListener() {
+        lblCliente.setText("Cliente");
+
+        lblName.setText("Nome");
+
+        lblEmail.setText("Email");
+
+        lblTelemovel.setText("Telemóvel");
+
+        btnCancelar.setText("Cancelar");
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRegistarActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
-        jButtonApagar.setText("Apagar");
-        jButtonApagar.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistar.setText("Registar");
+        btnRegistar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonApagarActionPerformed(evt);
+                btnRegistarActionPerformed(evt);
             }
         });
 
-        jComboBoxTipoUtilizador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        btnApagar.setText("Apagar");
+        btnApagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApagarActionPerformed(evt);
+            }
+        });
+
+        lvlLocalidade.setText("Localidade");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -93,7 +125,7 @@ public class Clientes extends javax.swing.JPanel {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelLinhasSelecionadas)
+                        .addComponent(lblLinhasSelecionadas)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,29 +133,32 @@ public class Clientes extends javax.swing.JPanel {
                                 .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblCliente)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabelPassword)
-                                            .addComponent(jLabelTipoUtilizador)
-                                            .addComponent(jLabelNome)
-                                            .addComponent(jLabelEmail))
-                                        .addGap(31, 31, 31)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextFieldPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jComboBoxTipoUtilizador, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jLabelUtilizador)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButtonRegistar)
+                                        .addComponent(btnRegistar)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButtonEditar)
+                                        .addComponent(btnEditar)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButtonApagar)
+                                        .addComponent(btnApagar)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lvlLocalidade)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblTelemovel)
+                                                .addComponent(lblName)
+                                                .addComponent(lblEmail))
+                                            .addGap(57, 57, 57)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtTelemovel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextFieldFzfind, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
@@ -131,70 +166,75 @@ public class Clientes extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(jTextFieldFzfind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelUtilizador)
+                        .addComponent(lblCliente)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelNome))
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblName))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelEmail))
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEmail))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelPassword))
+                            .addComponent(txtTelemovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTelemovel))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelTipoUtilizador)
-                            .addComponent(jComboBoxTipoUtilizador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(166, 166, 166)
+                            .addComponent(lvlLocalidade)
+                            .addComponent(txtLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(169, 169, 169)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonRegistar)
-                            .addComponent(jButtonEditar)
-                            .addComponent(jButtonApagar)
-                            .addComponent(jButtonCancelar))))
+                            .addComponent(btnRegistar)
+                            .addComponent(btnEditar)
+                            .addComponent(btnApagar)
+                            .addComponent(btnCancelar))))
                 .addGap(33, 33, 33)
-                .addComponent(jLabelLinhasSelecionadas)
+                .addComponent(lblLinhasSelecionadas)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEditarActionPerformed
+    }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void jButtonRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistarActionPerformed
+    private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
 
-    }//GEN-LAST:event_jButtonRegistarActionPerformed
+    }//GEN-LAST:event_btnRegistarActionPerformed
 
-    private void jButtonApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagarActionPerformed
+    private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonApagarActionPerformed
+    }//GEN-LAST:event_btnApagarActionPerformed
+
+    private void txtFiltrarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltrarKeyReleased
+        String texto = txtFiltrar.getText();
+        loadSearchData(texto);
+    }//GEN-LAST:event_txtFiltrarKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonApagar;
-    private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonEditar;
-    private javax.swing.JButton jButtonRegistar;
-    private javax.swing.JComboBox<String> jComboBoxTipoUtilizador;
-    private javax.swing.JLabel jLabelEmail;
-    private javax.swing.JLabel jLabelLinhasSelecionadas;
-    private javax.swing.JLabel jLabelNome;
-    private javax.swing.JLabel jLabelPassword;
-    private javax.swing.JLabel jLabelTipoUtilizador;
-    private javax.swing.JLabel jLabelUtilizador;
+    private javax.swing.JButton btnApagar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnRegistar;
     private javax.swing.JScrollPane jScrollPaneMain;
-    private javax.swing.JTable jTableMain;
-    private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldFzfind;
-    private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JTextField jTextFieldPassword;
+    private javax.swing.JLabel lblCliente;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblLinhasSelecionadas;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblTelemovel;
+    private javax.swing.JLabel lvlLocalidade;
+    private javax.swing.JTable tblMain;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtFiltrar;
+    private javax.swing.JTextField txtLocalidade;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtTelemovel;
     // End of variables declaration//GEN-END:variables
 }
