@@ -1,15 +1,18 @@
 package gui;
 
 import dao.ProcessoDAO;
+import dto.ProcessoDTO;
 import dao.ServicoDAO;
-import dao.UtilizadorDAO;
 import dto.ServicoDTO;
+import dao.UtilizadorDAO;
 import dto.UtilizadorDTO;
 import exceptions.ExceptionDAO;
+import java.math.BigDecimal;
 
 
 import java.util.List;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -230,7 +233,27 @@ public class ProcessosGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistarActionPerformed
+        if (txtDescricao.getText().equals("") || txtCusto.getText().equals("") || cbxFuncionario.getSelectedItem().equals(null) || cbxServicos.getSelectedItem().equals(null)) {
+            JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos."); 
+        } else {
+            ProcessoDTO processoDTO = new ProcessoDTO();
+            // sacar o id do serviço que esta na combobox
+            ServicoDTO servicoDTO = (ServicoDTO) cbxServicos.getSelectedItem();
+            if (servicoDTO != null) {
+                processoDTO.setIdServico(servicoDTO.getId());
+            }
+            
+            UtilizadorDTO funcionarioDTO = (UtilizadorDTO) cbxFuncionario.getSelectedItem();
+            if (funcionarioDTO != null) {
+                processoDTO.setIdFuncionario(funcionarioDTO.getId());
+            }
 
+            processoDTO.setDescricao(txtDescricao.getText());
+            processoDTO.setCusto(BigDecimal.valueOf(Double.parseDouble(txtCusto.getText().replace(",", "."))));
+            new ProcessoDAO().registarProcessoDAO(processoDTO);
+            loadDataSet();
+            clearCampos();
+        }
     }//GEN-LAST:event_jButtonRegistarActionPerformed
 
     private void jButtonApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagarActionPerformed
@@ -245,8 +268,23 @@ public class ProcessosGUI extends javax.swing.JPanel {
         for (int i = 0; i < coluna; i++) {
             val[i] = tblMain.getValueAt(linha, i);
         }
-        cbxServicos.setSelectedItem(val[1].toString());
-        cbxFuncionario.setSelectedItem(val[2].toString());
+        
+        // Escolhe o serviço do processo selecionado na cbxServicos
+        for (int i = 0; i < cbxServicos.getItemCount(); i++) {
+            ServicoDTO servicoDTO = cbxServicos.getItemAt(i);
+            if (servicoDTO.getDescricao().equals(val[1].toString())) {
+                cbxServicos.setSelectedItem(servicoDTO);
+                break;
+            }
+        }
+        // Escolhe o funcionario do processo selecionado na cbxFuncionarios
+        for (int i = 0; i < cbxFuncionario.getItemCount(); i++) {
+            UtilizadorDTO utilizadorDTO = cbxFuncionario.getItemAt(i);
+            if (utilizadorDTO.getNome().equals(val[2].toString())) {
+                cbxFuncionario.setSelectedItem(utilizadorDTO);
+                break;
+            }
+        }
         txtDescricao.setText(val[3].toString());
         txtCusto.setText(val[4].toString());
     }//GEN-LAST:event_tblMainMouseClicked

@@ -35,7 +35,7 @@ public class ProcessoDAO {
         }
     }
     
-    public boolean registarProcessoDAO(ProcessoDTO processoDTO) {
+    public void registarProcessoDAO(ProcessoDTO processoDTO) {
         String query = "INSERT INTO processo (id_servico, id_funcionario, descricao, custo) VALUES (?, ?, ?, ?)";
         try {
             prepStatement = conn.prepareStatement(query);
@@ -44,10 +44,9 @@ public class ProcessoDAO {
             prepStatement.setString(3, processoDTO.getDescricao());
             prepStatement.setBigDecimal(4, processoDTO.getCusto());
             prepStatement.executeUpdate();
-            return true;
+            System.out.println("DAO: Processo registado.");
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
     }
 
