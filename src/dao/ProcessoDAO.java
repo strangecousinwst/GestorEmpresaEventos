@@ -50,8 +50,8 @@ public class ProcessoDAO {
         }
     }
 
-    public boolean editarProcessoDAO(ProcessoDTO processoDTO) {
-        String query = "UPDATE processo SET id_servico=?, id_funcionario=?, descricao=?, custa=? WHERE id=?";
+    public void editarProcessoDAO(ProcessoDTO processoDTO) {
+        String query = "UPDATE processo SET id_servico=?, id_funcionario=?, descricao=?, custo=? WHERE id=?";
         try {
             prepStatement = conn.prepareStatement(query);
             prepStatement.setInt(1, processoDTO.getIdServico());
@@ -60,10 +60,9 @@ public class ProcessoDAO {
             prepStatement.setBigDecimal(4, processoDTO.getCusto());
             prepStatement.setInt(5, processoDTO.getId());
             prepStatement.executeUpdate();
-            return true;
+            System.out.println("DAO: Processo editado.");
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
     }
 

@@ -29,6 +29,7 @@ public class ProcessosGUI extends javax.swing.JPanel {
         loadDataSet();
         loadCbxFuncionarios();
         loadCbxServicos();
+        clearCampos();
     }
     
     public void loadDataSet() {
@@ -53,8 +54,8 @@ public class ProcessosGUI extends javax.swing.JPanel {
         txtDescricao.setText("");
         txtCusto.setText("");
         txtFiltrar.setText("");
-        cbxServicos.setSelectedIndex(0);
-        cbxFuncionario.setSelectedIndex(0);
+        cbxServicos.setSelectedIndex(-1);
+        cbxFuncionario.setSelectedIndex(-1);
     }
     
     
@@ -123,6 +124,11 @@ public class ProcessosGUI extends javax.swing.JPanel {
         lblCusto.setText("Custo");
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jButtonEditar.setText("Editar");
         jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -229,7 +235,32 @@ public class ProcessosGUI extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        // TODO add your handling code here:
+        if (tblMain.getSelectedRow() < 0)
+            JOptionPane.showMessageDialog(this, "Por favor selecione um Processo.");
+        else {
+            if (txtDescricao.getText().equals("") || txtCusto.getText().equals("") || cbxFuncionario.getSelectedItem().equals(null) || cbxServicos.getSelectedItem().equals(null)) {
+                JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
+            } else {
+                ProcessoDTO processoDTO = new ProcessoDTO();
+                processoDTO.setId((int) tblMain.getValueAt(tblMain.getSelectedRow(), 0));
+                // sacar o id do serviço que esta na combobox
+                ServicoDTO servicoDTO = (ServicoDTO) cbxServicos.getSelectedItem();
+                if (servicoDTO != null) {
+                    processoDTO.setIdServico(servicoDTO.getId());
+                }
+                
+                UtilizadorDTO funcionarioDTO = (UtilizadorDTO) cbxFuncionario.getSelectedItem();
+                if (funcionarioDTO != null) {
+                    processoDTO.setIdFuncionario(funcionarioDTO.getId());
+                }
+                
+                processoDTO.setDescricao(txtDescricao.getText());
+                processoDTO.setCusto(BigDecimal.valueOf(Double.parseDouble(txtCusto.getText().replace(",", "."))));
+                new ProcessoDAO().editarProcessoDAO(processoDTO);
+                loadDataSet();
+                clearCampos();
+            }
+        }
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistarActionPerformed
@@ -288,6 +319,11 @@ public class ProcessosGUI extends javax.swing.JPanel {
         txtDescricao.setText(val[3].toString());
         txtCusto.setText(val[4].toString());
     }//GEN-LAST:event_tblMainMouseClicked
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        clearCampos();
+        loadDataSet();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

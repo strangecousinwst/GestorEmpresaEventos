@@ -20,6 +20,7 @@ public class UtilizadoresGUI extends javax.swing.JPanel {
         initComponents();
         
         loadDataSet();
+        clearCampos();
     }
 
     public void loadDataSet() {
@@ -45,7 +46,7 @@ public class UtilizadoresGUI extends javax.swing.JPanel {
         txtEmail.setText("");
         txtPassword.setText("");
         txtFiltrar.setText("");
-        cbxTipoUtilizador.setSelectedIndex(0);
+        cbxTipoUtilizador.setSelectedIndex(-1);
     }
     
     
