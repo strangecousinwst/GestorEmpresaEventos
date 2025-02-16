@@ -39,6 +39,7 @@ public class Login extends javax.swing.JFrame {
         lblPassword = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         passPassword = new javax.swing.JPasswordField();
+        lblGestorEmpresa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
@@ -63,59 +64,56 @@ public class Login extends javax.swing.JFrame {
 
         lblPassword.setText("Password");
 
+        lblGestorEmpresa.setText("Gestor Empresa");
+
         javax.swing.GroupLayout pnlBackgroundLayout = new javax.swing.GroupLayout(pnlBackground);
         pnlBackground.setLayout(pnlBackgroundLayout);
         pnlBackgroundLayout.setHorizontalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                .addGap(115, 115, 115)
+                .addGap(130, 130, 130)
                 .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(passPassword)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLogin)
                     .addComponent(btnFechar)
-                    .addComponent(lblEmail)
+                    .addComponent(btnLimpar)
                     .addComponent(lblPassword)
-                    .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(passPassword)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
-                        .addGap(5, 5, 5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLimpar)
-                .addContainerGap(51, Short.MAX_VALUE))
+                    .addComponent(lblEmail)
+                    .addComponent(lblGestorEmpresa))
+                .addGap(132, 132, 132))
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(38, 38, 38)
+                .addComponent(lblGestorEmpresa)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(lblEmail)
-                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(lblPassword))
-                    .addGroup(pnlBackgroundLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
-                        .addComponent(passPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
+                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblPassword)
+                .addGap(18, 18, 18)
+                .addComponent(passPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnLogin)
                 .addGap(18, 18, 18)
-                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFechar)
-                    .addComponent(btnLimpar))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addComponent(btnLimpar)
+                .addGap(18, 18, 18)
+                .addComponent(btnFechar)
+                .addGap(52, 52, 52))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -127,12 +125,11 @@ public class Login extends javax.swing.JFrame {
         String password = String.valueOf(passPassword.getPassword());
         
         try {
-            if (new UtilizadorDAO().getLogin(email, password)) {
-                utilizadorDTO.setId();
-                new UtilizadorDAO().getTipoUtilizador(utilizadorDTO, email, password);
+            UtilizadorDTO utilizadorDTO = new UtilizadorDAO().getLogin(email, password);
+            if (utilizadorDTO != null) {
                 JOptionPane.showMessageDialog(null, "Credenciais Validas");
                 dispose();
-                new Home(email, utilizadorDTO);
+                new Home(utilizadorDTO);
                 // TODO abrir home
             } else {
                 JOptionPane.showMessageDialog(null, "Credenciais Inválidas");
@@ -153,6 +150,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblGestorEmpresa;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JPasswordField passPassword;
     private javax.swing.JPanel pnlBackground;

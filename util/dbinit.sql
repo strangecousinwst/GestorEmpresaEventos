@@ -1,5 +1,4 @@
 DROP DATABASE IF EXISTS efa0124_08_joao_gestor_empresa;
-
 CREATE DATABASE efa0124_08_joao_gestor_empresa;
 USE efa0124_08_joao_gestor_empresa;
 
@@ -29,6 +28,7 @@ CREATE TABLE servico (
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (id_cliente) REFERENCES cliente(id)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE processo (
@@ -40,6 +40,7 @@ CREATE TABLE processo (
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_servico) REFERENCES servico(id),
     FOREIGN KEY (id_funcionario) REFERENCES utilizador(id)
+    ON DELETE CASCADE
 );
 
 INSERT INTO utilizador (nome, email, password, tipo_utilizador) VALUES 

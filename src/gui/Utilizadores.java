@@ -4,6 +4,12 @@
  */
 package gui;
 
+import dao.UtilizadorDAO;
+import dto.UtilizadorDTO;
+import enums.TipoUtilizador;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author joao
@@ -15,8 +21,36 @@ public class Utilizadores extends javax.swing.JPanel {
      */
     public Utilizadores() {
         initComponents();
+        
+        loadDataSet();
     }
 
+    public void loadDataSet() {
+        try {
+            UtilizadorDAO utilizadorDAO = new UtilizadorDAO();
+            tblMain.setModel(utilizadorDAO.buildTableModel(utilizadorDAO.getQueryResult()));
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void loadSearchData(String texto) {
+        try {
+            UtilizadorDAO utilizadorDAO = new UtilizadorDAO();
+            tblMain.setModel(utilizadorDAO.buildTableModel(utilizadorDAO.getSearchResult(texto)));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void clearCampos() {
+        txtNome.setText("");
+        txtEmail.setText("");
+        txtPassword.setText("");
+        cbxTipoUtilizador.setSelectedIndex(0);
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,28 +61,38 @@ public class Utilizadores extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPaneMain = new javax.swing.JScrollPane();
-        jTableMain = new javax.swing.JTable();
+        tblMain = new javax.swing.JTable();
         jLabelLinhasSelecionadas = new javax.swing.JLabel();
-        jTextFieldFzfind = new javax.swing.JTextField();
+        txtFiltrar = new javax.swing.JTextField();
         jLabelUtilizador = new javax.swing.JLabel();
         jLabelNome = new javax.swing.JLabel();
         jLabelEmail = new javax.swing.JLabel();
         jLabelPassword = new javax.swing.JLabel();
         jLabelTipoUtilizador = new javax.swing.JLabel();
-        jTextFieldNome = new javax.swing.JTextField();
-        jTextFieldEmail = new javax.swing.JTextField();
-        jTextFieldPassword = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
         jButtonCancelar = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
         jButtonRegistar = new javax.swing.JButton();
         jButtonApagar = new javax.swing.JButton();
-        jComboBoxTipoUtilizador = new javax.swing.JComboBox<>();
+        cbxTipoUtilizador = new javax.swing.JComboBox<>();
 
-        jScrollPaneMain.setViewportView(jTableMain);
+        tblMain.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMainMouseClicked(evt);
+            }
+        });
+        jScrollPaneMain.setViewportView(tblMain);
 
         jLabelLinhasSelecionadas.setText("x de y linhas selecionadas.");
 
-        jTextFieldFzfind.setText("Filtrar..");
+        txtFiltrar.setText("Filtrar..");
+        txtFiltrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFiltrarKeyReleased(evt);
+            }
+        });
 
         jLabelUtilizador.setText("Utilizador");
 
@@ -61,6 +105,11 @@ public class Utilizadores extends javax.swing.JPanel {
         jLabelTipoUtilizador.setText("Tipo Utilizador");
 
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
 
         jButtonEditar.setText("Editar");
         jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +132,7 @@ public class Utilizadores extends javax.swing.JPanel {
             }
         });
 
-        jComboBoxTipoUtilizador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxTipoUtilizador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMINISTRADOR", "FUNCIONARIO" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,8 +147,8 @@ public class Utilizadores extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,10 +158,10 @@ public class Utilizadores extends javax.swing.JPanel {
                                             .addComponent(jLabelEmail))
                                         .addGap(31, 31, 31)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextFieldPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jComboBoxTipoUtilizador, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbxTipoUtilizador, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jLabelUtilizador)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButtonRegistar)
@@ -123,7 +172,7 @@ public class Utilizadores extends javax.swing.JPanel {
                                         .addGap(18, 18, 18)
                                         .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextFieldFzfind, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
@@ -131,7 +180,7 @@ public class Utilizadores extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(jTextFieldFzfind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -139,20 +188,20 @@ public class Utilizadores extends javax.swing.JPanel {
                         .addComponent(jLabelUtilizador)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelNome))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelEmail))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelPassword))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelTipoUtilizador)
-                            .addComponent(jComboBoxTipoUtilizador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxTipoUtilizador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(166, 166, 166)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonRegistar)
@@ -166,24 +215,89 @@ public class Utilizadores extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
-        // TODO add your handling code here:
+        if (tblMain.getSelectedRow() < 0)
+            JOptionPane.showMessageDialog(this, "Por favor selecione um Utilizador.");
+        else {
+            if (txtNome.getText().equals("") || txtEmail.getText().equals("") || txtPassword.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
+            } else {
+                UtilizadorDTO utilizadorDTO = new UtilizadorDTO();
+                utilizadorDTO.setId((int) tblMain.getValueAt(tblMain.getSelectedRow(), 0));
+                utilizadorDTO.setNome(txtNome.getText());
+                utilizadorDTO.setEmail(txtEmail.getText());
+                utilizadorDTO.setPassword(txtPassword.getText());
+                utilizadorDTO.setTipoUtilizador(TipoUtilizador.valueOf(cbxTipoUtilizador.getSelectedItem().toString()));
+                new UtilizadorDAO().editarUtilizadorDAO(utilizadorDTO);
+                loadDataSet();
+                clearCampos();
+            }
+        }
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistarActionPerformed
-
+        if (txtNome.getText().equals("") || txtEmail.getText().equals("") || txtPassword.getText().equals(""))
+            JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
+        else {
+            UtilizadorDTO utilizadorDTO = new UtilizadorDTO();
+            utilizadorDTO.setNome(txtNome.getText());
+            utilizadorDTO.setEmail(txtEmail.getText());
+            utilizadorDTO.setPassword(txtPassword.getText());
+            utilizadorDTO.setTipoUtilizador(TipoUtilizador.valueOf(cbxTipoUtilizador.getSelectedItem().toString()));
+            new UtilizadorDAO().registarUtilizador(utilizadorDTO);
+            loadDataSet();
+            clearCampos();
+        }
     }//GEN-LAST:event_jButtonRegistarActionPerformed
 
     private void jButtonApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagarActionPerformed
-        // TODO add your handling code here:
+        if (tblMain.getSelectedRow()<0)
+            JOptionPane.showMessageDialog(null, "Por favor selecione um Utilizador.");
+        else{
+            int opt = JOptionPane.showConfirmDialog(
+                    null,
+                    "Tem a certeza que deseja remover este Utilizador?",
+                    "Confirmation",
+                    JOptionPane.YES_NO_OPTION);
+            if(opt==JOptionPane.YES_OPTION) {
+                new UtilizadorDAO().removerUtilizadorDAO((int)(tblMain.getValueAt(
+                        tblMain.getSelectedRow(), 0)));
+                loadDataSet();
+                clearCampos();
+                
+            }
+        }
     }//GEN-LAST:event_jButtonApagarActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        clearCampos();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void tblMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMainMouseClicked
+        int linha = tblMain.getSelectedRow();
+        int coluna = tblMain.getColumnCount();
+        Object[] val = new Object[coluna];
+
+        for (int i = 0; i < coluna; i++) {
+            val[i] = tblMain.getValueAt(linha, i);
+        }
+        txtNome.setText(val[1].toString());
+        txtEmail.setText(val[2].toString());
+        txtPassword.setText(val[3].toString());
+        cbxTipoUtilizador.setSelectedItem(val[4].toString().toUpperCase());
+    }//GEN-LAST:event_tblMainMouseClicked
+
+    private void txtFiltrarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltrarKeyReleased
+        String texto = txtFiltrar.getText();
+        loadSearchData(texto);
+    }//GEN-LAST:event_txtFiltrarKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbxTipoUtilizador;
     private javax.swing.JButton jButtonApagar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonRegistar;
-    private javax.swing.JComboBox<String> jComboBoxTipoUtilizador;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelLinhasSelecionadas;
     private javax.swing.JLabel jLabelNome;
@@ -191,10 +305,10 @@ public class Utilizadores extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelTipoUtilizador;
     private javax.swing.JLabel jLabelUtilizador;
     private javax.swing.JScrollPane jScrollPaneMain;
-    private javax.swing.JTable jTableMain;
-    private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldFzfind;
-    private javax.swing.JTextField jTextFieldNome;
-    private javax.swing.JTextField jTextFieldPassword;
+    private javax.swing.JTable tblMain;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtFiltrar;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtPassword;
     // End of variables declaration//GEN-END:variables
 }

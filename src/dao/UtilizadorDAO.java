@@ -38,7 +38,8 @@ public class UtilizadorDAO {
         }
     }
     
-    public boolean getLogin(String email, String password) {
+    public UtilizadorDTO getLogin(String email, String password) {
+        UtilizadorDTO utilizadorDTO = null;
         String query = "SELECT * FROM utilizador WHERE email='"
                 + email
                 + "' AND password='"
@@ -47,15 +48,20 @@ public class UtilizadorDAO {
         try {
             resultSet = statement.executeQuery(query);
             if(resultSet.next()) {
+                utilizadorDTO = new UtilizadorDTO();
+                utilizadorDTO.setId(resultSet.getInt("id"));
+                utilizadorDTO.setNome(resultSet.getString("nome"));
+                utilizadorDTO.setEmail(resultSet.getString("email"));
+                utilizadorDTO.setPassword(resultSet.getString("password"));
+                utilizadorDTO.setTipoUtilizador(TipoUtilizador.valueOf(resultSet.getString("tipo_utilizador").toUpperCase()));
                 System.out.println("DAO: Login com sucesso.");
-                return true;
             } else {
                 System.out.println("DAO: Login falhado.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return utilizadorDTO;
     }
     
 
@@ -98,8 +104,8 @@ public class UtilizadorDAO {
                 email = "root";
                 password = "root";
             } else {
-                String query = "INSERT INTO users (nome, email, password, tipo_utilizador) " +
-                    "VALUES(?,?,?,?,?,?)";
+                String query = "INSERT INTO utilizador (nome, email, password, tipo_utilizador) " +
+                    "VALUES(?,?,?,?)";
                 prepStatement = conn.prepareStatement(query);
                 prepStatement.setString(1, utilizadorDTO.getNome());
                 prepStatement.setString(2, utilizadorDTO.getEmail());
@@ -155,6 +161,19 @@ public class UtilizadorDAO {
         }
         return resultSet;
     }
+    
+    public ResultSet getSearchResult(String searchText) {
+        try {
+            String query = "SELECT id, nome, email, password, tipo_utilizador FROM utilizador "
+                    + "WHERE id LIKE '%" + searchText + "%' OR email LIKE '%" + searchText + "%' "
+                    + "OR tipo_utilizador LIKE '%" + searchText + "%'";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+    
 
     public ResultSet getUtilizadorDAO(int id) {
         try {

@@ -25,9 +25,9 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jScrollPaneMain" min="-2" pref="667" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jScrollPaneMain" min="-2" pref="502" max="-2" attributes="0"/>
+                              <EmptySpace pref="34" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -38,10 +38,10 @@
                                       </Group>
                                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jTextFieldEmail" alignment="1" min="-2" pref="228" max="-2" attributes="0"/>
-                                          <Component id="jTextFieldPassword" alignment="1" min="-2" pref="228" max="-2" attributes="0"/>
-                                          <Component id="jTextFieldNome" alignment="0" min="-2" pref="228" max="-2" attributes="0"/>
-                                          <Component id="jComboBoxTipoUtilizador" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
+                                          <Component id="txtEmail" alignment="1" min="-2" pref="228" max="-2" attributes="0"/>
+                                          <Component id="txtPassword" alignment="1" min="-2" pref="228" max="-2" attributes="0"/>
+                                          <Component id="txtNome" alignment="0" min="-2" pref="228" max="-2" attributes="0"/>
+                                          <Component id="cbxTipoUtilizador" alignment="0" min="-2" pref="136" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="jLabelUtilizador" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -56,8 +56,8 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jTextFieldFzfind" min="-2" pref="186" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="txtFiltrar" min="-2" pref="186" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -71,7 +71,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-              <Component id="jTextFieldFzfind" min="-2" max="-2" attributes="0"/>
+              <Component id="txtFiltrar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPaneMain" alignment="0" min="-2" pref="380" max="-2" attributes="0"/>
@@ -79,23 +79,23 @@
                       <Component id="jLabelUtilizador" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextFieldNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="18" pref="18" max="18" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextFieldEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="18" pref="18" max="18" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextFieldPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="18" pref="18" max="18" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelTipoUtilizador" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBoxTipoUtilizador" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbxTipoUtilizador" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -121,7 +121,10 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTableMain">
+        <Component class="javax.swing.JTable" name="tblMain">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblMainMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -130,10 +133,13 @@
         <Property name="text" type="java.lang.String" value="x de y linhas selecionadas."/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldFzfind">
+    <Component class="javax.swing.JTextField" name="txtFiltrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Filtrar.."/>
       </Properties>
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFiltrarKeyReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelUtilizador">
       <Properties>
@@ -160,16 +166,19 @@
         <Property name="text" type="java.lang.String" value="Tipo Utilizador"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldNome">
+    <Component class="javax.swing.JTextField" name="txtNome">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldEmail">
+    <Component class="javax.swing.JTextField" name="txtEmail">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldPassword">
+    <Component class="javax.swing.JTextField" name="txtPassword">
     </Component>
     <Component class="javax.swing.JButton" name="jButtonCancelar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonEditar">
       <Properties>
@@ -195,14 +204,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonApagarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBoxTipoUtilizador">
+    <Component class="javax.swing.JComboBox" name="cbxTipoUtilizador">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="2">
+            <StringItem index="0" value="ADMINISTRADOR"/>
+            <StringItem index="1" value="FUNCIONARIO"/>
           </StringArray>
         </Property>
       </Properties>
