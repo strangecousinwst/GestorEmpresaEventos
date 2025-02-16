@@ -2,11 +2,8 @@ package gui;
 
 import dao.ClienteDAO;
 import dto.ClienteDTO;
-import exceptions.ExceptionDAO;
 
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -224,7 +221,7 @@ public class ClientesGUI extends javax.swing.JPanel {
         if (tblMain.getSelectedRow() < 0)
             JOptionPane.showMessageDialog(this, "Por favor selecione um Cliente.");
         else {
-            if (txtNome.getText().equals("") || txtEmail.getText().equals("") || txtTelemovel.getText().equals("")|| txtLocalidade.getText().equals("")) {
+            if (txtNome.getText().isEmpty() || txtEmail.getText().isEmpty() || txtTelemovel.getText().isEmpty()|| txtLocalidade.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
             } else {
                 ClienteDTO clienteDTO = new ClienteDTO();
@@ -241,7 +238,7 @@ public class ClientesGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
-        if (txtNome.getText().equals("") || txtEmail.getText().equals("") || txtTelemovel.getText().equals("")|| txtLocalidade.getText().equals("")) {
+        if (txtNome.getText().isEmpty() || txtEmail.getText().isEmpty() || txtTelemovel.getText().isEmpty()|| txtLocalidade.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
         } else {
             ClienteDTO clienteDTO = new ClienteDTO();

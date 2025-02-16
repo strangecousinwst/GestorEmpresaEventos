@@ -4,7 +4,6 @@
  */
 package gui;
 
-import dao.UtilizadorDAO;
 import dto.UtilizadorDTO;
 
 /**

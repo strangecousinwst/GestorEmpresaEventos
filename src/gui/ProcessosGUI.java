@@ -6,7 +6,6 @@ import dao.ServicoDAO;
 import dto.ServicoDTO;
 import dao.UtilizadorDAO;
 import dto.UtilizadorDTO;
-import exceptions.ExceptionDAO;
 import java.math.BigDecimal;
 
 
@@ -20,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class ProcessosGUI extends javax.swing.JPanel {
 
-    public ProcessosGUI() throws ExceptionDAO {
+    public ProcessosGUI() {
         initComponents();
         
         loadDataSet();
@@ -56,7 +55,7 @@ public class ProcessosGUI extends javax.swing.JPanel {
     }
     
     
-    private void loadCbxFuncionarios() throws ExceptionDAO {
+    private void loadCbxFuncionarios() {
         UtilizadorDAO utilizadorDAO = new UtilizadorDAO();
         List<UtilizadorDTO> funcionariosDTO = utilizadorDAO.getFuncionariosDAO();
         for (UtilizadorDTO funcionarioDTO : funcionariosDTO) {
@@ -64,7 +63,7 @@ public class ProcessosGUI extends javax.swing.JPanel {
         }
     }
     
-    private void loadCbxServicos() throws ExceptionDAO {
+    private void loadCbxServicos() {
         ServicoDAO servicoDAO = new ServicoDAO();
         List<ServicoDTO> servicosDTO = servicoDAO.getServicosDAO();
         for (ServicoDTO servicoDTO : servicosDTO) {
@@ -241,7 +240,7 @@ public class ProcessosGUI extends javax.swing.JPanel {
         if (tblMain.getSelectedRow() < 0)
             JOptionPane.showMessageDialog(this, "Por favor selecione um Processo.");
         else {
-            if (txtDescricao.getText().equals("") || txtCusto.getText().equals("") || cbxFuncionario.getSelectedItem().equals(null) || cbxServicos.getSelectedItem().equals(null)) {
+            if (txtDescricao.getText().isEmpty() || txtCusto.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
             } else {
                 ProcessoDTO processoDTO = new ProcessoDTO();
@@ -267,7 +266,7 @@ public class ProcessosGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
-        if (txtDescricao.getText().equals("") || txtCusto.getText().equals("") || cbxFuncionario.getSelectedItem().equals(null) || cbxServicos.getSelectedItem().equals(null)) {
+        if (txtDescricao.getText().isEmpty() || txtCusto.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos."); 
         } else {
             ProcessoDTO processoDTO = new ProcessoDTO();

@@ -3,7 +3,6 @@ package dao;
 import dto.UtilizadorDTO;
 import database.ConnectionFactory;
 import enums.TipoUtilizador;
-import exceptions.ExceptionDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,8 +32,8 @@ public class UtilizadorDAO {
         try {
             conn = new ConnectionFactory().getConn();
             statement = conn.createStatement();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     
@@ -64,42 +63,17 @@ public class UtilizadorDAO {
         return utilizadorDTO;
     }
 
-    // Methods to add new user
-    public void isUtilizadorDAO(UtilizadorDTO utilizadorDTO) {
-        try {
-            String query = "SELECT * FROM utilizador WHERE nome='"
-                    + utilizadorDTO.getNome()
-                    + "' AND email='"
-                    + utilizadorDTO.getEmail()
-                    + "' AND password='"
-                    + utilizadorDTO.getPassword()
-                    + "' AND tipo_utilizador='"
-                    + utilizadorDTO.getTipoUtilizador().toString()
-                    + "'";
-            resultSet = statement.executeQuery(query);
-            if(resultSet.next()) {
-                System.out.println("DAO: Utilizador já existe");
-            } else
-                registarUtilizadorDAO(utilizadorDTO);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
     public void registarUtilizadorDAO(UtilizadorDTO utilizadorDTO) {
         try {
-            String nome = null;
-            String email = null;
-            String password = null;
-            TipoUtilizador tipoUtilizador = null;
+
             String resultQuery = "SELECT * FROM utilizador";
             resultSet = statement.executeQuery(resultQuery);
             
             // se não tiver resultados não existem utilizadores,
             // criar o primeiro, root root
             if(!resultSet.next()){
-                email = "root";
-                password = "root";
+                utilizadorDTO.setEmail("root");
+                utilizadorDTO.setPassword("root");
             } else {
                 String query = "INSERT INTO utilizador (nome, email, password, tipo_utilizador) " +
                     "VALUES(?,?,?,?)";
@@ -158,7 +132,7 @@ public class UtilizadorDAO {
         return resultSet;
     }
     
-    public List<UtilizadorDTO> getFuncionariosDAO() throws ExceptionDAO {
+    public List<UtilizadorDTO> getFuncionariosDAO() {
 
         String query = "SELECT * FROM utilizador WHERE tipo_utilizador = 'funcionario'";
         List<UtilizadorDTO> funcionariosDTO = new ArrayList<>();
@@ -175,102 +149,9 @@ public class UtilizadorDAO {
                 funcionariosDTO.add(funcionarioDTO);
             }
         } catch (SQLException e) {
-            throw new ExceptionDAO("DAO: Erro ao procurar utilizador: " + e);
-        } finally {
-            try {
-                if (prepStatement != null) {
-                    prepStatement.close();
-                }
-            } catch (SQLException e) {
-                throw new ExceptionDAO("DAO: Erro ao fechar o preparedStatement: " + e);
-            }
-            try {
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-            } catch (SQLException e) {
-                throw new ExceptionDAO("DAO: Erro ao fechar o resultSet: " + e);
-            }
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                throw new ExceptionDAO("DAO: Erro ao fechar a conexão: " + e);
-            }
+            e.printStackTrace();
         }
         return funcionariosDTO;
-    }
-    
-    public ResultSet getUtilizadorDAO(int id) {
-        try {
-            String query = "SELECT * FROM utilizador WHERE id='" + id + "'";
-            resultSet = statement.executeQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return resultSet;
-    }
-    
-    public void getNome(UtilizadorDTO utilizadorDTO, String email, String password) {
-        try {
-            String query = "SELECT * FROM utilizador WHERE email='" 
-                    + email
-                    + "' AND password='" 
-                    + password 
-                    + "' LIMIT 1";
-            resultSet = statement.executeQuery(query);
-            if(resultSet.next()) {
-                String nome = resultSet.getString(2);
-                utilizadorDTO.setNome(nome);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public void getTipoUtilizador(UtilizadorDTO utilizadorDTO, String email, String password) {
-        try {
-            String query = "SELECT * FROM utilizador WHERE email = '"
-                    + email
-                    + "' AND password='" 
-                    + password 
-                    + "' LIMIT 1";
-            resultSet = statement.executeQuery(query);
-            if(resultSet.next()) {
-                TipoUtilizador tipoUtilizador = TipoUtilizador.valueOf(resultSet.getString(5).toUpperCase());
-                utilizadorDTO.setTipoUtilizador(tipoUtilizador);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public ResultSet getPassDAO(String email, String password){
-        try {
-            String query = "SELECT password FROM utilizador WHERE email='"
-                    + email
-                    + "' AND password='"
-                    + password
-                    +"'";
-            resultSet = statement.executeQuery(query);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return resultSet;
-    }
-
-    public void mudarPassword(String email, String password) {
-        try {
-            String query = "UPDATE utilizador SET password=? WHERE email='" +email+ "'";
-            prepStatement = (PreparedStatement) conn.prepareStatement(query);
-            prepStatement.setString(1, password);
-            prepStatement.setString(2, email);
-            prepStatement.executeUpdate();
-            System.out.println("Password mudada com sucesso");
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
     }
     
     public ResultSet getSearchResult(String searchText) {

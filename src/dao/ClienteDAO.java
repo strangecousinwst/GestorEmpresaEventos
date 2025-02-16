@@ -130,7 +130,6 @@ public class ClienteDAO {
         }
         return resultSet;
     }
-    
 
     public ResultSet getSearchResult(String searchText) {
         try {

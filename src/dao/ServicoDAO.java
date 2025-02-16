@@ -3,7 +3,6 @@ package dao;
 import dto.ServicoDTO;
 import database.ConnectionFactory;
 import enums.EstadoServico;
-import exceptions.ExceptionDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

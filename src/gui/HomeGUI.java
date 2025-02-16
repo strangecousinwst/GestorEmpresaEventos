@@ -9,7 +9,6 @@ import enums.TipoUtilizador;
 import exceptions.ExceptionDAO;
 
 import java.awt.CardLayout;
-import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -93,7 +92,7 @@ public class HomeGUI extends javax.swing.JFrame {
         lblUtilizador.setText("Utilizador: " + utilizadorDTO.getNome()+ " (" + tipoUtilizador + ")");
     }
     
-    private void getUtilizador() throws ExceptionDAO {
+    private void getUtilizador() {
         getUtilizadorSessao();
         if (tipoUtilizador.equals(TipoUtilizador.FUNCIONARIO.toString())) {
             restrictFuncionario();

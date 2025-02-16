@@ -5,6 +5,7 @@ import dto.UtilizadorDTO;
 import enums.TipoUtilizador;
 
 import java.sql.SQLException;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 
 /**
@@ -223,7 +224,7 @@ public class UtilizadoresGUI extends javax.swing.JPanel {
         if (tblMain.getSelectedRow() < 0)
             JOptionPane.showMessageDialog(this, "Por favor selecione um Utilizador.");
         else {
-            if (txtNome.getText().equals("") || txtEmail.getText().equals("") || txtPassword.getText().equals("")) {
+            if (txtNome.getText().isEmpty() || txtEmail.getText().isEmpty() || txtPassword.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
             } else {
                 UtilizadorDTO utilizadorDTO = new UtilizadorDTO();
@@ -231,7 +232,7 @@ public class UtilizadoresGUI extends javax.swing.JPanel {
                 utilizadorDTO.setNome(txtNome.getText());
                 utilizadorDTO.setEmail(txtEmail.getText());
                 utilizadorDTO.setPassword(txtPassword.getText());
-                utilizadorDTO.setTipoUtilizador(TipoUtilizador.valueOf(cbxTipoUtilizador.getSelectedItem().toString()));
+                utilizadorDTO.setTipoUtilizador(TipoUtilizador.valueOf(Objects.requireNonNull(cbxTipoUtilizador.getSelectedItem()).toString()));
                 new UtilizadorDAO().editarUtilizadorDAO(utilizadorDTO);
                 loadDataSet();
                 clearCampos();
@@ -240,14 +241,14 @@ public class UtilizadoresGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistarActionPerformed
-        if (txtNome.getText().equals("") || txtEmail.getText().equals("") || txtPassword.getText().equals("")) {
+        if (txtNome.getText().isEmpty() || txtEmail.getText().isEmpty() || txtPassword.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos."); 
         } else {
             UtilizadorDTO utilizadorDTO = new UtilizadorDTO();
             utilizadorDTO.setNome(txtNome.getText());
             utilizadorDTO.setEmail(txtEmail.getText());
             utilizadorDTO.setPassword(txtPassword.getText());
-            utilizadorDTO.setTipoUtilizador(TipoUtilizador.valueOf(cbxTipoUtilizador.getSelectedItem().toString()));
+            utilizadorDTO.setTipoUtilizador(TipoUtilizador.valueOf(Objects.requireNonNull(cbxTipoUtilizador.getSelectedItem()).toString()));
             new UtilizadorDAO().registarUtilizadorDAO(utilizadorDTO);
             loadDataSet();
             clearCampos();

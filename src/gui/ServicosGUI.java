@@ -1,19 +1,16 @@
 package gui;
 
 import dao.ClienteDAO;
-import dao.ProcessoDAO;
-import dto.ProcessoDTO;
 import dao.ServicoDAO;
 import dto.ServicoDTO;
 import dto.ClienteDTO;
-import dto.UtilizadorDTO;
 import enums.EstadoServico;
-import exceptions.ExceptionDAO;
 import java.math.BigDecimal;
 
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class ServicosGUI extends javax.swing.JPanel {
 
-    public ServicosGUI() throws ExceptionDAO {
+    public ServicosGUI() {
         initComponents();
         
         loadDataSet();
@@ -49,7 +46,7 @@ public class ServicosGUI extends javax.swing.JPanel {
         }
     }
     
-    private void loadCbxClientes() throws ExceptionDAO {
+    private void loadCbxClientes() {
         ClienteDAO clienteDAO = new ClienteDAO();
         List<ClienteDTO> clientesDTO = clienteDAO.getClientesDAO();
         for (ClienteDTO clienteDTO : clientesDTO) {
@@ -239,7 +236,7 @@ public class ServicosGUI extends javax.swing.JPanel {
         if (tblMain.getSelectedRow() < 0)
             JOptionPane.showMessageDialog(this, "Por favor selecione um Serviço.");
         else {
-            if (txtDescricao.getText().equals("") || txtPreco.getText().equals("") || cbxEstado.getSelectedItem().equals(null) || cbxCliente.getSelectedItem().equals(null)) {
+            if (txtDescricao.getText().isEmpty() || txtPreco.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
             } else {
                 ServicoDTO servicoDTO = new ServicoDTO();
@@ -251,7 +248,7 @@ public class ServicosGUI extends javax.swing.JPanel {
                 }
                 
                 servicoDTO.setDescricao(txtDescricao.getText());
-                servicoDTO.setEstadoServico(EstadoServico.valueOf(cbxEstado.getSelectedItem().toString()));
+                servicoDTO.setEstadoServico(EstadoServico.valueOf((String) cbxEstado.getSelectedItem()));
                 servicoDTO.setPreco(BigDecimal.valueOf(Double.parseDouble(txtPreco.getText().replace(",", "."))));
                 new ServicoDAO().editarServicoDAO(servicoDTO);
                 loadDataSet();
@@ -261,7 +258,7 @@ public class ServicosGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
-        if (txtDescricao.getText().equals("") || txtPreco.getText().equals("") || cbxEstado.getSelectedItem().equals(null) || cbxCliente.getSelectedItem().equals(null)) {
+        if (txtDescricao.getText().isEmpty() || txtPreco.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos."); 
         } else {
             ServicoDTO servicoDTO = new ServicoDTO();
@@ -273,7 +270,7 @@ public class ServicosGUI extends javax.swing.JPanel {
             
 
             servicoDTO.setDescricao(txtDescricao.getText());
-            servicoDTO.setEstadoServico(EstadoServico.valueOf(cbxEstado.getSelectedItem().toString()));
+            servicoDTO.setEstadoServico(EstadoServico.valueOf(Objects.requireNonNull(cbxEstado.getSelectedItem()).toString()));
             servicoDTO.setPreco(BigDecimal.valueOf(Double.parseDouble(txtPreco.getText().replace(",", "."))));
             new ServicoDAO().registarServicoDAO(servicoDTO);
             loadDataSet();

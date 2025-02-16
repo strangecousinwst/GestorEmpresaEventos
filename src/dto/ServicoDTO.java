@@ -2,7 +2,6 @@ package dto;
 
 import enums.EstadoServico;
 import java.math.BigDecimal;
-import java.util.Objects;
 
 /**
  *
