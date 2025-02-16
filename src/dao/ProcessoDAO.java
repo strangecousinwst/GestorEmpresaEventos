@@ -35,7 +35,7 @@ public class ProcessoDAO {
         }
     }
     
-    public boolean addProcesso(ProcessoDTO processoDTO) {
+    public boolean registarProcessoDAO(ProcessoDTO processoDTO) {
         String query = "INSERT INTO processo (id_servico, id_funcionario, descricao, custo) VALUES (?, ?, ?, ?)";
         try {
             prepStatement = conn.prepareStatement(query);
@@ -51,7 +51,7 @@ public class ProcessoDAO {
         }
     }
 
-    public boolean updateProcesso(ProcessoDTO processoDTO) {
+    public boolean editarProcessoDAO(ProcessoDTO processoDTO) {
         String query = "UPDATE processo SET id_servico=?, id_funcionario=?, descricao=?, custa=? WHERE id=?";
         try {
             prepStatement = conn.prepareStatement(query);
@@ -68,7 +68,7 @@ public class ProcessoDAO {
         }
     }
 
-    public boolean deleteProcesso(int id) {
+    public boolean removerProcessoDAO(int id) {
         String query = "DELETE FROM processo WHERE id=?";
         try {
             prepStatement = conn.prepareStatement(query);
@@ -124,7 +124,7 @@ public class ProcessoDAO {
     
     public ResultSet getQueryResult() {
         try {
-            String query = "SELECT * FROM processo";
+            String query = "SELECT processo.id, servico.descricao AS 'serviço', utilizador.nome AS 'funcionario', processo.descricao, processo.custo, processo.criado_em FROM processo INNER JOIN servico ON servico.id=processo.id_servico INNER JOIN utilizador ON utilizador.id=processo.id_funcionario ORDER BY processo.id";
             resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();

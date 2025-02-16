@@ -135,9 +135,9 @@ public class UtilizadorDAO {
 
     // Metodo para remover utilizador
     public void removerUtilizadorDAO(int id) {
+        String query = "DELETE FROM utilizador WHERE id=?";
         try {
-            String query = "DELETE FROM utilizador WHERE id=?";
-            prepStatement = (PreparedStatement) conn.prepareStatement(query);
+            prepStatement = conn.prepareStatement(query);
             prepStatement.setInt(1, id);
             prepStatement.executeUpdate();
             System.out.println("DAO: Utilizador removido.");
@@ -161,18 +161,18 @@ public class UtilizadorDAO {
     public List<UtilizadorDTO> getFuncionariosDAO() throws ExceptionDAO {
 
         String query = "SELECT * FROM utilizador WHERE tipo_utilizador = 'funcionario'";
-        List<UtilizadorDTO> funcionarios = new ArrayList<>();
+        List<UtilizadorDTO> funcionariosDTO = new ArrayList<>();
         try {
             prepStatement = conn.prepareStatement(query);
             resultSet = prepStatement.executeQuery();
             while (resultSet.next()) {
-                UtilizadorDTO funcionario = new UtilizadorDTO();
-                funcionario.setId(resultSet.getInt("id"));
-                funcionario.setNome(resultSet.getString("nome"));
-                funcionario.setEmail(resultSet.getString("email"));
-                funcionario.setPassword(resultSet.getString("password"));
-                funcionario.setTipoUtilizador(TipoUtilizador.valueOf(resultSet.getString("tipo_utilizador").toUpperCase()));
-                funcionarios.add(funcionario);
+                UtilizadorDTO funcionarioDTO = new UtilizadorDTO();
+                funcionarioDTO.setId(resultSet.getInt("id"));
+                funcionarioDTO.setNome(resultSet.getString("nome"));
+                funcionarioDTO.setEmail(resultSet.getString("email"));
+                funcionarioDTO.setPassword(resultSet.getString("password"));
+                funcionarioDTO.setTipoUtilizador(TipoUtilizador.valueOf(resultSet.getString("tipo_utilizador").toUpperCase()));
+                funcionariosDTO.add(funcionarioDTO);
             }
         } catch (SQLException e) {
             throw new ExceptionDAO("DAO: Erro ao procurar utilizador: " + e);
@@ -199,7 +199,7 @@ public class UtilizadorDAO {
                 throw new ExceptionDAO("DAO: Erro ao fechar a conexão: " + e);
             }
         }
-        return funcionarios;
+        return funcionariosDTO;
     }
     
     public ResultSet getUtilizadorDAO(int id) {

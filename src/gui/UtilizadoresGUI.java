@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package gui;
 
 import dao.UtilizadorDAO;
@@ -258,9 +254,9 @@ public class UtilizadoresGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonRegistarActionPerformed
 
     private void jButtonApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagarActionPerformed
-        if (tblMain.getSelectedRow()<0)
+        if (tblMain.getSelectedRow()<0) {
             JOptionPane.showMessageDialog(null, "Por favor selecione um Utilizador.");
-        else{
+        } else{
             int opt = JOptionPane.showConfirmDialog(
                     null,
                     "Tem a certeza que deseja remover este Utilizador?",

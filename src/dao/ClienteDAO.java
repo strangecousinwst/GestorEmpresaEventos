@@ -70,16 +70,15 @@ public class ClienteDAO {
         }
     }
 
-    public boolean deleteCliente(int id) {
+    public void removerClienteDAO(int id) {
         String query = "DELETE FROM cliente WHERE id=?";
         try {
             prepStatement = conn.prepareStatement(query);
             prepStatement.setInt(1, id);
             prepStatement.executeUpdate();
-            return true;
+            System.out.println("DAO: Cliente removido.");
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
     }
 

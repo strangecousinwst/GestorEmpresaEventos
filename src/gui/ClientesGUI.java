@@ -73,12 +73,17 @@ public class ClientesGUI extends javax.swing.JPanel {
         btnApagar = new javax.swing.JButton();
         lvlLocalidade = new javax.swing.JLabel();
         txtLocalidade = new javax.swing.JTextField();
+        lblFiltrar = new javax.swing.JLabel();
 
+        tblMain.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMainMouseClicked(evt);
+            }
+        });
         jScrollPaneMain.setViewportView(tblMain);
 
         lblLinhasSelecionadas.setText("x de y linhas selecionadas.");
 
-        txtFiltrar.setText("Filtrar..");
         txtFiltrar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtFiltrarKeyReleased(evt);
@@ -123,6 +128,8 @@ public class ClientesGUI extends javax.swing.JPanel {
 
         lvlLocalidade.setText("Localidade");
 
+        lblFiltrar.setText("Filtrar:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,13 +170,17 @@ public class ClientesGUI extends javax.swing.JPanel {
                             .addComponent(lblLinhasSelecionadas))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFiltrar))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(30, 30, 30)
+                .addComponent(lblFiltrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblCliente)
@@ -242,7 +253,21 @@ public class ClientesGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRegistarActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
-        // TODO add your handling code here:
+        if (tblMain.getSelectedRow()<0) {
+            JOptionPane.showMessageDialog(null, "Por favor selecione um Cliente.");
+        } else{
+            int opt = JOptionPane.showConfirmDialog(
+                    null,
+                    "Tem a certeza que deseja remover este Cliente?",
+                    "Confirmation",
+                    JOptionPane.YES_NO_OPTION);
+            if(opt==JOptionPane.YES_OPTION) {
+                new ClienteDAO().removerClienteDAO((int)(tblMain.getValueAt(
+                        tblMain.getSelectedRow(), 0)));
+                loadDataSet();
+                clearCampos();
+            }
+        }
     }//GEN-LAST:event_btnApagarActionPerformed
 
     private void txtFiltrarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltrarKeyReleased
@@ -255,6 +280,20 @@ public class ClientesGUI extends javax.swing.JPanel {
         loadDataSet();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void tblMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMainMouseClicked
+        int linha = tblMain.getSelectedRow();
+        int coluna = tblMain.getColumnCount();
+        Object[] val = new Object[coluna];
+
+        for (int i = 0; i < coluna; i++) {
+            val[i] = tblMain.getValueAt(linha, i);
+        }
+        txtNome.setText(val[1].toString());
+        txtEmail.setText(val[2].toString());
+        txtTelemovel.setText(val[3].toString());
+        txtLocalidade.setText(val[4].toString());
+    }//GEN-LAST:event_tblMainMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApagar;
@@ -264,6 +303,7 @@ public class ClientesGUI extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPaneMain;
     private javax.swing.JLabel lblCliente;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblFiltrar;
     private javax.swing.JLabel lblLinhasSelecionadas;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblTelemovel;

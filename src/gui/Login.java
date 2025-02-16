@@ -129,7 +129,7 @@ public class Login extends javax.swing.JFrame {
             if (utilizadorDTO != null) {
 //                JOptionPane.showMessageDialog(null, "Credenciais Validas");
                 dispose();
-                new Home(utilizadorDTO);
+                new HomeGUI(utilizadorDTO);
                 // TODO abrir home
             } else {
                 JOptionPane.showMessageDialog(null, "Credenciais Inválidas");
