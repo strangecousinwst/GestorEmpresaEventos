@@ -52,13 +52,21 @@ public class Home extends javax.swing.JFrame {
         BemVindoPanel.setPreferredSize(pnlMain.getPreferredSize());
         pnlMain.add("Bem-Vindo", BemVindoPanel);
         //pnlMain.add("Serviços", new Servicos());
-        //pnlMain.add("Processos", new Processos());
+        
+        // Painel Processos
+        JPanel ProcessosPanel = new Processos();
+        ProcessosPanel.setPreferredSize(pnlMain.getPreferredSize());
+        pnlMain.add("Processos", ProcessosPanel);
+        
         // Painel Clientes
-        JPanel ClientesPanel = new Clientes();
+        JPanel ClientesPanel = new ClientesGUI();
         ClientesPanel.setPreferredSize(pnlMain.getPreferredSize());
         pnlMain.add("Clientes", ClientesPanel);
-        //pnlMain.add("Clientes", new Clientes(username, this));
-        pnlMain.add("Utilizadores", new Utilizadores());
+        
+        // Painel Utilizadores
+        JPanel UtilizadoresPanel = new UtilizadoresGUI();
+        UtilizadoresPanel.setPreferredSize(pnlMain.getPreferredSize());
+        pnlMain.add("Utilizadores", new UtilizadoresGUI());
         
         System.out.println("Login com: " + nome + " " + email + " " + tipoUtilizador);
         
@@ -74,9 +82,9 @@ public class Home extends javax.swing.JFrame {
 //    public void mostrarServicos() {
 //        cardlayout.show(pnlMain, "Serviços");
 //    }
-//    public void mostrarProcessos() {
-//        cardlayout.show(pnlMain, "Processos");
-//    }
+    public void mostrarProcessos() {
+        cardlayout.show(pnlMain, "Processos");
+    }
     public void mostrarClientes() {
         cardlayout.show(pnlMain, "Clientes");
     }
@@ -135,10 +143,20 @@ public class Home extends javax.swing.JFrame {
         pnlOpcoes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         btnHome.setText("Home");
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomeActionPerformed(evt);
+            }
+        });
 
         btnServicos.setText("Serviços");
 
         btnProcessos.setText("Processos");
+        btnProcessos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcessosActionPerformed(evt);
+            }
+        });
 
         btnUtilizadores.setText("Utilizadores");
         btnUtilizadores.addActionListener(new java.awt.event.ActionListener() {
@@ -305,6 +323,14 @@ public class Home extends javax.swing.JFrame {
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         mostrarClientes();
     }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnProcessosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessosActionPerformed
+        mostrarProcessos();
+    }//GEN-LAST:event_btnProcessosActionPerformed
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        mostrarBemVindo();
+    }//GEN-LAST:event_btnHomeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

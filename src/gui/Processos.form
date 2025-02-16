@@ -25,26 +25,10 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jScrollPaneMain" min="-2" pref="667" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jScrollPaneMain" min="-2" pref="519" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabelPassword" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabelTipoUtilizador" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabelNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabelEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jTextFieldEmail" alignment="1" min="-2" pref="228" max="-2" attributes="0"/>
-                                          <Component id="jTextFieldPassword" alignment="1" min="-2" pref="228" max="-2" attributes="0"/>
-                                          <Component id="jTextFieldNome" alignment="0" min="-2" pref="228" max="-2" attributes="0"/>
-                                          <Component id="jComboBoxTipoUtilizador" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Component id="jLabelUtilizador" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jButtonRegistar" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -54,14 +38,27 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jButtonCancelar" min="-2" pref="84" max="-2" attributes="0"/>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblDescricao" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblCusto" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblServico" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblFuncionario" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblProcessos" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jTextFieldPassword" pref="228" max="32767" attributes="0"/>
+                                          <Component id="txtCusto" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="cbxFuncionario" alignment="0" pref="153" max="32767" attributes="0"/>
+                                          <Component id="cbxProcessos" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jTextFieldFzfind" min="-2" pref="186" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="txtFiltrar" min="-2" pref="186" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -71,31 +68,31 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-              <Component id="jTextFieldFzfind" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Component id="txtFiltrar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPaneMain" alignment="0" min="-2" pref="380" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabelUtilizador" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblProcessos" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextFieldNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblServico" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbxProcessos" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="18" pref="18" max="18" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextFieldEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbxFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="18" pref="18" max="18" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTextFieldPassword" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="18" pref="18" max="18" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelTipoUtilizador" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBoxTipoUtilizador" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCusto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCusto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -108,7 +105,7 @@
               </Group>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="jLabelLinhasSelecionadas" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="9" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -121,7 +118,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTableMain">
+        <Component class="javax.swing.JTable" name="tblMain">
         </Component>
       </SubComponents>
     </Container>
@@ -130,39 +127,35 @@
         <Property name="text" type="java.lang.String" value="x de y linhas selecionadas."/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldFzfind">
+    <Component class="javax.swing.JTextField" name="txtFiltrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Filtrar.."/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelUtilizador">
+    <Component class="javax.swing.JLabel" name="lblProcessos">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Utilizador"/>
+        <Property name="text" type="java.lang.String" value="Processo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelNome">
+    <Component class="javax.swing.JLabel" name="lblServico">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nome"/>
+        <Property name="text" type="java.lang.String" value="Servi&#xe7;o"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelEmail">
+    <Component class="javax.swing.JLabel" name="lblFuncionario">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Email"/>
+        <Property name="text" type="java.lang.String" value="Funcionario"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelPassword">
+    <Component class="javax.swing.JLabel" name="lblDescricao">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Password"/>
+        <Property name="text" type="java.lang.String" value="Descricao"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelTipoUtilizador">
+    <Component class="javax.swing.JLabel" name="lblCusto">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tipo Utilizador"/>
+        <Property name="text" type="java.lang.String" value="Custo"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldNome">
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldEmail">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldPassword">
     </Component>
@@ -195,7 +188,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonApagarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBoxTipoUtilizador">
+    <Component class="javax.swing.JComboBox" name="cbxProcessos">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -209,6 +202,18 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbxFuncionario">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;UtilizadorDTO&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtCusto">
     </Component>
   </SubComponents>
 </Form>

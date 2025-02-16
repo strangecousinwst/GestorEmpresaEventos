@@ -36,7 +36,7 @@ public class ClienteDAO {
         }
     }
 
-    public boolean addCliente(ClienteDTO clienteDTO) {
+    public boolean registarClienteDAO(ClienteDTO clienteDTO) {
         String query = "INSERT INTO cliente (nome, email, telemovel, localidade) VALUES (?, ?, ?, ?)";
         try {
             prepStatement = conn.prepareStatement(query);
@@ -52,8 +52,8 @@ public class ClienteDAO {
         }
     }
 
-    public boolean updateCliente(ClienteDTO clienteDTO) {
-        String query = "UPDATE cliente SET nome=?, email=?, telemove=?, localidade=? WHERE id=?";
+    public boolean editarClienteDAO(ClienteDTO clienteDTO) {
+        String query = "UPDATE cliente SET nome=?, email=?, telemovel=?, localidade=? WHERE id=?";
         try {
             prepStatement = conn.prepareStatement(query);
             prepStatement.setString(1, clienteDTO.getNome());
@@ -62,6 +62,7 @@ public class ClienteDAO {
             prepStatement.setString(4, clienteDTO.getLocalidade());
             prepStatement.setInt(5, clienteDTO.getId());
             prepStatement.executeUpdate();
+            System.out.println("DAO: Cliente editado.");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

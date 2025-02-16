@@ -3,6 +3,7 @@ package dao;
 import dto.UtilizadorDTO;
 import database.ConnectionFactory;
 import enums.TipoUtilizador;
+import exceptions.ExceptionDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -79,13 +80,13 @@ public class UtilizadorDAO {
             if(resultSet.next()) {
                 System.out.println("DAO: Utilizador já existe");
             } else
-                registarUtilizador(utilizadorDTO);
+                registarUtilizadorDAO(utilizadorDTO);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
-    public void registarUtilizador(UtilizadorDTO utilizadorDTO) {
+    public void registarUtilizadorDAO(UtilizadorDTO utilizadorDTO) {
         try {
             String nome = null;
             String email = null;
@@ -117,9 +118,8 @@ public class UtilizadorDAO {
 
     // Metodo para editar utilizador
     public void editarUtilizadorDAO(UtilizadorDTO utilizadorDTO) {
-
+        String query = "UPDATE utilizador SET nome=?, email=?, password=?, tipo_utilizador=? WHERE id=?";    
         try {
-            String query = "UPDATE utilizador SET nome=?, email=?, password=?, tipo_utilizador=? WHERE id=?";
             prepStatement = conn.prepareStatement(query);
             prepStatement.setString(1, utilizadorDTO.getNome());
             prepStatement.setString(2, utilizadorDTO.getEmail());
@@ -158,9 +158,50 @@ public class UtilizadorDAO {
         return resultSet;
     }
     
+    public List<UtilizadorDTO> getFuncionariosDAO() throws ExceptionDAO {
 
+        String query = "SELECT * FROM utilizador WHERE tipo_utilizador = 'funcionario'";
+        List<UtilizadorDTO> funcionarios = new ArrayList<>();
+        try {
+            prepStatement = conn.prepareStatement(query);
+            resultSet = prepStatement.executeQuery();
+            while (resultSet.next()) {
+                UtilizadorDTO funcionario = new UtilizadorDTO();
+                funcionario.setId(resultSet.getInt("id"));
+                funcionario.setNome(resultSet.getString("nome"));
+                funcionario.setEmail(resultSet.getString("email"));
+                funcionario.setPassword(resultSet.getString("password"));
+                funcionario.setTipoUtilizador(TipoUtilizador.valueOf(resultSet.getString("tipo_utilizador").toUpperCase()));
+                funcionarios.add(funcionario);
+            }
+        } catch (SQLException e) {
+            throw new ExceptionDAO("DAO: Erro ao procurar utilizador: " + e);
+        } finally {
+            try {
+                if (prepStatement != null) {
+                    prepStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("DAO: Erro ao fechar o preparedStatement: " + e);
+            }
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("DAO: Erro ao fechar o resultSet: " + e);
+            }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("DAO: Erro ao fechar a conexão: " + e);
+            }
+        }
+        return funcionarios;
+    }
     
-
     public ResultSet getUtilizadorDAO(int id) {
         try {
             String query = "SELECT * FROM utilizador WHERE id='" + id + "'";
@@ -205,7 +246,6 @@ public class UtilizadorDAO {
         }
     }
 
-
     public ResultSet getPassDAO(String email, String password){
         try {
             String query = "SELECT password FROM utilizador WHERE email='"
@@ -219,8 +259,6 @@ public class UtilizadorDAO {
         }
         return resultSet;
     }
-    
-    
 
     public void mudarPassword(String email, String password) {
         try {
@@ -235,12 +273,14 @@ public class UtilizadorDAO {
         }
     }
     
-    
     public ResultSet getSearchResult(String searchText) {
         try {
             String query = "SELECT id, nome, email, password, tipo_utilizador FROM utilizador "
-                    + "WHERE id LIKE '%" + searchText + "%' OR email LIKE '%" + searchText + "%' "
-                    + "OR tipo_utilizador LIKE '%" + searchText + "%'";
+                    + "WHERE id LIKE '%" + searchText
+                    + "%' OR nome LIKE '%" + searchText 
+                    + "%' OR email LIKE '%" + searchText 
+                    + "%' OR tipo_utilizador LIKE '%" + searchText 
+                    + "%'";
             resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -274,5 +314,4 @@ public class UtilizadorDAO {
         
         return new DefaultTableModel(data, columnNames);
     }
-
 }

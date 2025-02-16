@@ -1,8 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package gui;
+
+import dao.UtilizadorDAO;
+import dto.UtilizadorDTO;
+import exceptions.ExceptionDAO;
+import java.util.List;
 
 /**
  *
@@ -13,9 +14,20 @@ public class Processos extends javax.swing.JPanel {
     /**
      * Creates new form Utilizadores1
      */
-    public Processos() {
+    public Processos() throws ExceptionDAO {
         initComponents();
+        
+        loadCbxFuncionarios();
     }
+    
+     private void loadCbxFuncionarios() throws ExceptionDAO {
+        UtilizadorDAO utilizadorDAO = new UtilizadorDAO();
+        List<UtilizadorDTO> funcionarios = utilizadorDAO.getFuncionariosDAO();
+        for (UtilizadorDTO funcionario : funcionarios) {
+            cbxFuncionario.addItem(funcionario);
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,38 +39,38 @@ public class Processos extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPaneMain = new javax.swing.JScrollPane();
-        jTableMain = new javax.swing.JTable();
+        tblMain = new javax.swing.JTable();
         jLabelLinhasSelecionadas = new javax.swing.JLabel();
-        jTextFieldFzfind = new javax.swing.JTextField();
-        jLabelUtilizador = new javax.swing.JLabel();
-        jLabelNome = new javax.swing.JLabel();
-        jLabelEmail = new javax.swing.JLabel();
-        jLabelPassword = new javax.swing.JLabel();
-        jLabelTipoUtilizador = new javax.swing.JLabel();
-        jTextFieldNome = new javax.swing.JTextField();
-        jTextFieldEmail = new javax.swing.JTextField();
+        txtFiltrar = new javax.swing.JTextField();
+        lblProcessos = new javax.swing.JLabel();
+        lblServico = new javax.swing.JLabel();
+        lblFuncionario = new javax.swing.JLabel();
+        lblDescricao = new javax.swing.JLabel();
+        lblCusto = new javax.swing.JLabel();
         jTextFieldPassword = new javax.swing.JTextField();
         jButtonCancelar = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
         jButtonRegistar = new javax.swing.JButton();
         jButtonApagar = new javax.swing.JButton();
-        jComboBoxTipoUtilizador = new javax.swing.JComboBox<>();
+        cbxProcessos = new javax.swing.JComboBox<>();
+        cbxFuncionario = new javax.swing.JComboBox<>();
+        txtCusto = new javax.swing.JTextField();
 
-        jScrollPaneMain.setViewportView(jTableMain);
+        jScrollPaneMain.setViewportView(tblMain);
 
         jLabelLinhasSelecionadas.setText("x de y linhas selecionadas.");
 
-        jTextFieldFzfind.setText("Filtrar..");
+        txtFiltrar.setText("Filtrar..");
 
-        jLabelUtilizador.setText("Utilizador");
+        lblProcessos.setText("Processo");
 
-        jLabelNome.setText("Nome");
+        lblServico.setText("Serviço");
 
-        jLabelEmail.setText("Email");
+        lblFuncionario.setText("Funcionario");
 
-        jLabelPassword.setText("Password");
+        lblDescricao.setText("Descricao");
 
-        jLabelTipoUtilizador.setText("Tipo Utilizador");
+        lblCusto.setText("Custo");
 
         jButtonCancelar.setText("Cancelar");
 
@@ -83,7 +95,7 @@ public class Processos extends javax.swing.JPanel {
             }
         });
 
-        jComboBoxTipoUtilizador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxProcessos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,22 +110,9 @@ public class Processos extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabelPassword)
-                                            .addComponent(jLabelTipoUtilizador)
-                                            .addComponent(jLabelNome)
-                                            .addComponent(jLabelEmail))
-                                        .addGap(31, 31, 31)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextFieldPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jComboBoxTipoUtilizador, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jLabelUtilizador)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jButtonRegistar)
                                         .addGap(18, 18, 18)
@@ -121,38 +120,50 @@ public class Processos extends javax.swing.JPanel {
                                         .addGap(18, 18, 18)
                                         .addComponent(jButtonApagar)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextFieldFzfind, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblDescricao)
+                                            .addComponent(lblCusto)
+                                            .addComponent(lblServico)
+                                            .addComponent(lblFuncionario)
+                                            .addComponent(lblProcessos))
+                                        .addGap(31, 31, 31)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jTextFieldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                                            .addComponent(txtCusto)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(cbxFuncionario, javax.swing.GroupLayout.Alignment.LEADING, 0, 153, Short.MAX_VALUE)
+                                                .addComponent(cbxProcessos, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                            .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(18, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(jTextFieldFzfind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelUtilizador)
+                        .addComponent(lblProcessos)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelNome))
+                            .addComponent(lblServico)
+                            .addComponent(cbxProcessos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelEmail))
+                            .addComponent(lblFuncionario)
+                            .addComponent(cbxFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelPassword))
+                            .addComponent(lblDescricao))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelTipoUtilizador)
-                            .addComponent(jComboBoxTipoUtilizador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblCusto)
+                            .addComponent(txtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(166, 166, 166)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonRegistar)
@@ -161,7 +172,7 @@ public class Processos extends javax.swing.JPanel {
                             .addComponent(jButtonCancelar))))
                 .addGap(33, 33, 33)
                 .addComponent(jLabelLinhasSelecionadas)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -179,22 +190,22 @@ public class Processos extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<UtilizadorDTO> cbxFuncionario;
+    private javax.swing.JComboBox<String> cbxProcessos;
     private javax.swing.JButton jButtonApagar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonEditar;
     private javax.swing.JButton jButtonRegistar;
-    private javax.swing.JComboBox<String> jComboBoxTipoUtilizador;
-    private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelLinhasSelecionadas;
-    private javax.swing.JLabel jLabelNome;
-    private javax.swing.JLabel jLabelPassword;
-    private javax.swing.JLabel jLabelTipoUtilizador;
-    private javax.swing.JLabel jLabelUtilizador;
     private javax.swing.JScrollPane jScrollPaneMain;
-    private javax.swing.JTable jTableMain;
-    private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldFzfind;
-    private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldPassword;
+    private javax.swing.JLabel lblCusto;
+    private javax.swing.JLabel lblDescricao;
+    private javax.swing.JLabel lblFuncionario;
+    private javax.swing.JLabel lblProcessos;
+    private javax.swing.JLabel lblServico;
+    private javax.swing.JTable tblMain;
+    private javax.swing.JTextField txtCusto;
+    private javax.swing.JTextField txtFiltrar;
     // End of variables declaration//GEN-END:variables
 }

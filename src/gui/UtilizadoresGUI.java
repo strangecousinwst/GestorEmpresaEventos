@@ -15,12 +15,12 @@ import javax.swing.JOptionPane;
  *
  * @author joao
  */
-public class Utilizadores extends javax.swing.JPanel {
+public class UtilizadoresGUI extends javax.swing.JPanel {
 
     /**
      * Creates new form Utilizadores1
      */
-    public Utilizadores() {
+    public UtilizadoresGUI() {
         initComponents();
         
         loadDataSet();
@@ -48,6 +48,7 @@ public class Utilizadores extends javax.swing.JPanel {
         txtNome.setText("");
         txtEmail.setText("");
         txtPassword.setText("");
+        txtFiltrar.setText("");
         cbxTipoUtilizador.setSelectedIndex(0);
     }
     
@@ -78,6 +79,7 @@ public class Utilizadores extends javax.swing.JPanel {
         jButtonRegistar = new javax.swing.JButton();
         jButtonApagar = new javax.swing.JButton();
         cbxTipoUtilizador = new javax.swing.JComboBox<>();
+        lblFiltrar = new javax.swing.JLabel();
 
         tblMain.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -88,7 +90,6 @@ public class Utilizadores extends javax.swing.JPanel {
 
         lblLinhasSelecionadas.setText("x de y linhas selecionadas.");
 
-        txtFiltrar.setText("Filtrar..");
         txtFiltrar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtFiltrarKeyReleased(evt);
@@ -135,6 +136,8 @@ public class Utilizadores extends javax.swing.JPanel {
 
         cbxTipoUtilizador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMINISTRADOR", "FUNCIONARIO" }));
 
+        lblFiltrar.setText("Filtrar :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,9 +145,6 @@ public class Utilizadores extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblLinhasSelecionadas)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -175,14 +175,21 @@ public class Utilizadores extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFiltrar)
+                            .addComponent(lblLinhasSelecionadas))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(36, 36, 36)
+                .addComponent(lblFiltrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -236,15 +243,15 @@ public class Utilizadores extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
     private void jButtonRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistarActionPerformed
-        if (txtNome.getText().equals("") || txtEmail.getText().equals("") || txtPassword.getText().equals(""))
-            JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
-        else {
+        if (txtNome.getText().equals("") || txtEmail.getText().equals("") || txtPassword.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos."); 
+        } else {
             UtilizadorDTO utilizadorDTO = new UtilizadorDTO();
             utilizadorDTO.setNome(txtNome.getText());
             utilizadorDTO.setEmail(txtEmail.getText());
             utilizadorDTO.setPassword(txtPassword.getText());
             utilizadorDTO.setTipoUtilizador(TipoUtilizador.valueOf(cbxTipoUtilizador.getSelectedItem().toString()));
-            new UtilizadorDAO().registarUtilizador(utilizadorDTO);
+            new UtilizadorDAO().registarUtilizadorDAO(utilizadorDTO);
             loadDataSet();
             clearCampos();
         }
@@ -271,6 +278,7 @@ public class Utilizadores extends javax.swing.JPanel {
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         clearCampos();
+        loadDataSet();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void tblMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMainMouseClicked
@@ -305,6 +313,7 @@ public class Utilizadores extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelTipoUtilizador;
     private javax.swing.JLabel jLabelUtilizador;
     private javax.swing.JScrollPane jScrollPaneMain;
+    private javax.swing.JLabel lblFiltrar;
     private javax.swing.JLabel lblLinhasSelecionadas;
     private javax.swing.JTable tblMain;
     private javax.swing.JTextField txtEmail;

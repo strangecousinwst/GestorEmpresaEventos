@@ -127,7 +127,7 @@ public class Login extends javax.swing.JFrame {
         try {
             UtilizadorDTO utilizadorDTO = new UtilizadorDAO().getLogin(email, password);
             if (utilizadorDTO != null) {
-                JOptionPane.showMessageDialog(null, "Credenciais Validas");
+//                JOptionPane.showMessageDialog(null, "Credenciais Validas");
                 dispose();
                 new Home(utilizadorDTO);
                 // TODO abrir home
