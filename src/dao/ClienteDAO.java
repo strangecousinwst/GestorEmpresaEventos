@@ -2,6 +2,7 @@ package dao;
 
 import dto.ClienteDTO;
 import database.ConnectionFactory;
+import exceptions.ExceptionDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -103,7 +104,7 @@ public class ClienteDAO {
         return null;
     }
 
-    public List<ClienteDTO> getAllClientes() {
+    public List<ClienteDTO> getClientesDAO() {
         String query = "SELECT * FROM cliente";
         List<ClienteDTO> clientes = new ArrayList<>();
         try {
@@ -118,7 +119,7 @@ public class ClienteDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } 
         return clientes;
     }
     

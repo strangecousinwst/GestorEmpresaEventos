@@ -30,16 +30,11 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                                      <Component id="lblProcessos" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblServico" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="lblCusto" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="lblFuncionario" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cbxFuncionario" pref="177" max="32767" attributes="0"/>
-                                      <Component id="lblDescricao" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtDescricao" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="txtCusto" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
+                                  <Component id="lblPreco" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblDescricao" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtPreco" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
                                   <Component id="btnRegistar" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
                                   <Component id="btnEditar" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
                                   <Component id="btnApagar" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
@@ -49,8 +44,19 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblServico" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbxServicos" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="lblCliente" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbxCliente" min="-2" pref="184" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txtDescricao" min="-2" pref="177" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblEstado" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbxEstado" min="-2" pref="177" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -69,7 +75,7 @@
               <Component id="lblFiltrar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="lblProcessos" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblServico" min="-2" max="-2" attributes="0"/>
                   <Component id="txtFiltrar" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -80,21 +86,21 @@
                       <Component id="jLabelLinhasSelecionadas" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="lblServico" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCliente" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cbxServicos" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lblFuncionario" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cbxFuncionario" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbxCliente" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="lblDescricao" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtDescricao" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lblCusto" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="lblEstado" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtCusto" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbxEstado" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="lblPreco" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtPreco" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnRegistar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -135,29 +141,29 @@
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFiltrarKeyReleased"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblProcessos">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Processo"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblServico">
       <Properties>
         <Property name="text" type="java.lang.String" value="Servi&#xe7;o"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblFuncionario">
+    <Component class="javax.swing.JLabel" name="lblCliente">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Funcionario"/>
+        <Property name="text" type="java.lang.String" value="Cliente"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDescricao">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Descricao"/>
+        <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblCusto">
+    <Component class="javax.swing.JLabel" name="lblEstado">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Custo"/>
+        <Property name="text" type="java.lang.String" value="Estado"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPreco">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pre&#xe7;o"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDescricao">
@@ -194,27 +200,31 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnApagarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbxServicos">
+    <Component class="javax.swing.JComboBox" name="cbxCliente">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;ServicoDTO&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;ClienteDTO&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbxFuncionario">
+    <Component class="javax.swing.JComboBox" name="cbxEstado">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
+          <StringArray count="3">
+            <StringItem index="0" value="ABERTO"/>
+            <StringItem index="1" value="EM_ANDAMENTO"/>
+            <StringItem index="2" value="CONCLUIDO"/>
+          </StringArray>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;UtilizadorDTO&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtCusto">
+    <Component class="javax.swing.JTextField" name="txtPreco">
     </Component>
     <Component class="javax.swing.JLabel" name="lblFiltrar">
       <Properties>

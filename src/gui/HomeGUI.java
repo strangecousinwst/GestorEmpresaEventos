@@ -9,6 +9,7 @@ import enums.TipoUtilizador;
 import exceptions.ExceptionDAO;
 
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -20,11 +21,13 @@ import javax.swing.JPanel;
 
 public class HomeGUI extends javax.swing.JFrame {
     
-    CardLayout cardlayout;
-    String tipoUtilizador;
-    String email;
-    String nome;
-    UtilizadorDTO utilizadorDTO;
+
+    private CardLayout cardLayout;
+
+    private String tipoUtilizador;
+    private String email;
+    private String nome;
+    private UtilizadorDTO utilizadorDTO;
 
     /**
      * Creates new form Main
@@ -32,26 +35,41 @@ public class HomeGUI extends javax.swing.JFrame {
     public HomeGUI(UtilizadorDTO utilizadorDTO) throws ExceptionDAO {
         initComponents();
         
-        pnlMenu.setVisible(true);
-        pnlOpcoes.setVisible(false);
-        cardlayout = new CardLayout();
         this.utilizadorDTO = utilizadorDTO;
-        nome = utilizadorDTO.getNome();
+        this.nome = utilizadorDTO.getNome();
         this.email = utilizadorDTO.getEmail();
         tipoUtilizador = utilizadorDTO.getTipoUtilizador().toString();
-        getUtilizadorSessao();
-        if (tipoUtilizador.equals(TipoUtilizador.FUNCIONARIO.toString())) {
-            // TODO restric funcionario
-            restrictFuncionario();
-        }
-        // pnlMain com o layout em card,
-        // permite alterar pelos varios menus
-        pnlMain.setLayout(cardlayout);
+        pnlMenu.setVisible(true);
+        pnlOpcoes.setVisible(false);
+        cardLayout = new CardLayout();
+        getUtilizador();
+        SetupCardLayout();
+        SetupFrame();
+    }
+    
+    private void SetupFrame() {        
+        setTitle("Gestor Processos");
+        setLocationRelativeTo(null);
+        setSize(1024,768);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        cardLayout.show(pnlMain, "Bem-Vindo");   
+        pack();
+    }
+    
+    private void SetupCardLayout() throws ExceptionDAO {
+        // pnlMain com o layout em card, permite alterar pelos varios menus
+        pnlMain.setLayout(cardLayout);
+        
         // Painel Bem-Vindo
-        JPanel BemVindoPanel = new BemVindo(utilizadorDTO);
+        JPanel BemVindoPanel = new BemVindoGUI(utilizadorDTO);
         BemVindoPanel.setPreferredSize(pnlMain.getPreferredSize());
         pnlMain.add("Bem-Vindo", BemVindoPanel);
+        
         //pnlMain.add("Serviços", new Servicos());
+        JPanel ServicosPanel = new ServicosGUI();
+        ServicosPanel.setPreferredSize(pnlMain.getPreferredSize());
+        pnlMain.add("Serviços", ServicosPanel);
         
         // Painel Processos
         JPanel ProcessosPanel = new ProcessosGUI();
@@ -66,38 +84,49 @@ public class HomeGUI extends javax.swing.JFrame {
         // Painel Utilizadores
         JPanel UtilizadoresPanel = new UtilizadoresGUI();
         UtilizadoresPanel.setPreferredSize(pnlMain.getPreferredSize());
-        pnlMain.add("Utilizadores", new UtilizadoresGUI());
+        pnlMain.add("Utilizadores", UtilizadoresPanel);
         
-        System.out.println("Login com: " + nome + " " + email + " " + tipoUtilizador);
-        
-        this.setTitle("Gestor Processos");
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-
     }
     
-    public void mostrarBemVindo(){
-        cardlayout.show(pnlMain, "Bem-Vindo");
-    }
-//    public void mostrarServicos() {
-//        cardlayout.show(pnlMain, "Serviços");
-//    }
-    public void mostrarProcessos() {
-        cardlayout.show(pnlMain, "Processos");
-    }
-    public void mostrarClientes() {
-        cardlayout.show(pnlMain, "Clientes");
-    }
-    public void mostrarUtilizadores() {
-        cardlayout.show(pnlMain, "Utilizadores");
-    }
-
     // Metodo para mostar o utilizador
-    public void getUtilizadorSessao() {
+    private void getUtilizadorSessao() {
         lblUtilizador.setText("Utilizador: " + utilizadorDTO.getNome()+ " (" + tipoUtilizador + ")");
     }
     
-    public void restrictFuncionario() {
+    private void getUtilizador() throws ExceptionDAO {
+        getUtilizadorSessao();
+        if (tipoUtilizador.equals(TipoUtilizador.FUNCIONARIO.toString())) {
+            restrictFuncionario();
+        }
+        System.out.println("Login com: " + nome + " " + email + " " + tipoUtilizador);
+    }
+    
+    private void mostrarBemVindo(){
+        cardLayout.show(pnlMain, "Bem-Vindo");
+        pnlOpcoes.setVisible(!pnlOpcoes.isVisible());
+    }
+    
+    private void mostrarServicos() {
+        cardLayout.show(pnlMain, "Serviços");
+        pnlOpcoes.setVisible(!pnlOpcoes.isVisible());
+    }
+    
+    private void mostrarProcessos() {
+        cardLayout.show(pnlMain, "Processos");
+        pnlOpcoes.setVisible(!pnlOpcoes.isVisible());
+    }
+    
+    private void mostrarClientes() {
+        cardLayout.show(pnlMain, "Clientes");
+        pnlOpcoes.setVisible(!pnlOpcoes.isVisible());
+    }
+    
+    private void mostrarUtilizadores() {
+        cardLayout.show(pnlMain, "Utilizadores");
+        pnlOpcoes.setVisible(!pnlOpcoes.isVisible());
+    }
+    
+    private void restrictFuncionario() {
         pnlOpcoes.remove(btnUtilizadores);
         pnlOpcoes.remove(btnClientes);
     }
@@ -150,6 +179,11 @@ public class HomeGUI extends javax.swing.JFrame {
         });
 
         btnServicos.setText("Serviços");
+        btnServicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnServicosActionPerformed(evt);
+            }
+        });
 
         btnProcessos.setText("Processos");
         btnProcessos.addActionListener(new java.awt.event.ActionListener() {
@@ -269,17 +303,17 @@ public class HomeGUI extends javax.swing.JFrame {
                     .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pnlOpcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlUtilizador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
                 .addComponent(pnlUtilizador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
                 .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -334,6 +368,9 @@ public class HomeGUI extends javax.swing.JFrame {
         mostrarBemVindo();
     }//GEN-LAST:event_btnHomeActionPerformed
 
+    private void btnServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicosActionPerformed
+        mostrarServicos();
+    }//GEN-LAST:event_btnServicosActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClientes;

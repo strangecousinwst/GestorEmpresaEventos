@@ -86,4 +86,40 @@ public class ServicoDAO {
         return servicosDTO;
     }
     
+    public ResultSet getQueryResult() {
+        try {
+            String query = "SELECT servico.id, cliente.nome AS 'cliente', servico.descricao, servico.estado, servico.preco, servico.criado_em, servico.atualizado_em FROM servico INNER JOIN cliente ON cliente.id=servico.id_cliente ORDER BY servico.id";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+    
+    public DefaultTableModel buildTableModel(ResultSet resultSet) throws SQLException {
+        ResultSetMetaData metaData = resultSet.getMetaData();
+        int colCount = metaData.getColumnCount();
+        String[] columnNames = new String[colCount];
+
+        for (int col = 1; col <= colCount; col++) {
+            columnNames[col - 1] = metaData.getColumnName(col).toUpperCase();
+        }
+
+        List<Object[]> dataList = new ArrayList<>();
+        while (resultSet.next()) {
+            Object[] linha = new Object[colCount];
+            for (int col = 1; col <= colCount; col++) {
+                linha[col - 1] = resultSet.getObject(col);
+            }
+            dataList.add(linha);
+        }
+
+        Object[][] data = new Object[dataList.size()][colCount];
+        for (int i = 0; i < dataList.size(); i++) {
+            data[i] = dataList.get(i);
+        }
+        return new DefaultTableModel(data, columnNames);
+    }
+    
+    
 }

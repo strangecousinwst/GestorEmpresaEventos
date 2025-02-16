@@ -11,12 +11,12 @@ import dto.UtilizadorDTO;
  *
  * @author joao
  */
-public class BemVindo extends javax.swing.JPanel {
+public class BemVindoGUI extends javax.swing.JPanel {
 
     /**
      * Creates new form Utilizadores1
      */
-    public BemVindo(UtilizadorDTO utilizadorDTO) {
+    public BemVindoGUI(UtilizadorDTO utilizadorDTO) {
         initComponents();
         
         lblBemVindo.setText("Bem-vindo, " + utilizadorDTO.getNome() + ".");
@@ -34,7 +34,7 @@ public class BemVindo extends javax.swing.JPanel {
         lblBemVindo = new javax.swing.JLabel();
         lblMensagem = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(400, 300));
+        setPreferredSize(new java.awt.Dimension(0, 0));
 
         lblBemVindo.setText("Bem-vindo");
 

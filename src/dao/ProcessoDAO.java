@@ -66,16 +66,15 @@ public class ProcessoDAO {
         }
     }
 
-    public boolean removerProcessoDAO(int id) {
+    public void removerProcessoDAO(int id) {
         String query = "DELETE FROM processo WHERE id=?";
         try {
             prepStatement = conn.prepareStatement(query);
             prepStatement.setInt(1, id);
             prepStatement.executeUpdate();
-            return true;
+            System.out.println("DAO: Processo removido.");
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
     }
 
@@ -133,12 +132,16 @@ public class ProcessoDAO {
 
     public ResultSet getSearchResult(String searchText) {
         try {
-            String query = "SELECT id, id_servico, id_funcionario, descricao, custo FROM processo "
-                    + "WHERE id LIKE '%" + searchText 
-                    + "%' OR id_servico LIKE '%" + searchText 
-                    + "%' OR id_funcionario LIKE '%" + searchText 
-                    + "%' OR descricao LIKE '%" + searchText 
-                    + "%' OR custo LIKE '%" + searchText + "%' ";
+            String query = "SELECT processo.id, servico.descricao AS 'serviço', utilizador.nome AS 'funcionario', processo.descricao, processo.custo, processo.criado_em "
+                    + "FROM processo INNER JOIN servico ON servico.id=processo.id_servico INNER JOIN utilizador ON utilizador.id=processo.id_funcionario "
+                    + "WHERE processo.id LIKE '%" + searchText 
+                    + "%' OR servico.descricao LIKE '%" + searchText 
+                    + "%' OR utilizador.nome LIKE '%" + searchText 
+                    + "%' OR processo.descricao LIKE '%" + searchText 
+                    + "%' OR processo.custo LIKE '%" + searchText 
+                    + "%' OR processo.criado_em LIKE '%" + searchText 
+                    + "%' ORDER BY processo.id";
+            System.out.println(query);
             resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();

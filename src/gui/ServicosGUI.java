@@ -1,40 +1,39 @@
 package gui;
 
+import dao.ClienteDAO;
 import dao.ProcessoDAO;
 import dto.ProcessoDTO;
 import dao.ServicoDAO;
 import dto.ServicoDTO;
-import dao.UtilizadorDAO;
+import dto.ClienteDTO;
 import dto.UtilizadorDTO;
 import exceptions.ExceptionDAO;
 import java.math.BigDecimal;
 
 
-import java.util.List;
 import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author joao
  */
-public class ProcessosGUI extends javax.swing.JPanel {
+public class ServicosGUI extends javax.swing.JPanel {
 
-    public ProcessosGUI() throws ExceptionDAO {
+    public ServicosGUI() throws ExceptionDAO {
         initComponents();
         
         loadDataSet();
-        loadCbxFuncionarios();
-        loadCbxServicos();
         clearCampos();
     }
     
     public void loadDataSet() {
         try {
-            ProcessoDAO processoDAO = new ProcessoDAO();
-            tblMain.setModel(processoDAO.buildTableModel(processoDAO.getQueryResult()));
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            ServicoDAO servicoDAO = new ServicoDAO();
+            tblMain.setModel(servicoDAO.buildTableModel(servicoDAO.getQueryResult()));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     
@@ -47,31 +46,21 @@ public class ProcessosGUI extends javax.swing.JPanel {
         }
     }
     
+    private void loadCbxClientes() throws ExceptionDAO {
+        ClienteDAO clienteDAO = new ClienteDAO();
+        List<ClienteDTO> clientesDTO = clienteDAO.getClientesDAO();
+        for (ClienteDTO clienteDTO : clientesDTO) {
+            cbxCliente.addItem(clienteDTO);
+        }
+    }
+    
     public void clearCampos() {
         txtDescricao.setText("");
-        txtCusto.setText("");
+        txtPreco.setText("");
         txtFiltrar.setText("");
-        cbxServicos.setSelectedIndex(-1);
-        cbxFuncionario.setSelectedIndex(-1);
+        cbxCliente.setSelectedIndex(-1);
+        cbxEstado.setSelectedIndex(-1);
     }
-    
-    
-    private void loadCbxFuncionarios() throws ExceptionDAO {
-        UtilizadorDAO utilizadorDAO = new UtilizadorDAO();
-        List<UtilizadorDTO> funcionariosDTO = utilizadorDAO.getFuncionariosDAO();
-        for (UtilizadorDTO funcionarioDTO : funcionariosDTO) {
-            cbxFuncionario.addItem(funcionarioDTO);
-        }
-    }
-    
-    private void loadCbxServicos() throws ExceptionDAO {
-        ServicoDAO servicoDAO = new ServicoDAO();
-        List<ServicoDTO> servicosDTO = servicoDAO.getServicosDAO();
-        for (ServicoDTO servicoDTO : servicosDTO) {
-            cbxServicos.addItem(servicoDTO);
-        }
-    }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,19 +75,19 @@ public class ProcessosGUI extends javax.swing.JPanel {
         tblMain = new javax.swing.JTable();
         jLabelLinhasSelecionadas = new javax.swing.JLabel();
         txtFiltrar = new javax.swing.JTextField();
-        lblProcessos = new javax.swing.JLabel();
         lblServico = new javax.swing.JLabel();
-        lblFuncionario = new javax.swing.JLabel();
+        lblCliente = new javax.swing.JLabel();
         lblDescricao = new javax.swing.JLabel();
-        lblCusto = new javax.swing.JLabel();
+        lblEstado = new javax.swing.JLabel();
+        lblPreco = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnRegistar = new javax.swing.JButton();
         btnApagar = new javax.swing.JButton();
-        cbxServicos = new javax.swing.JComboBox<>();
-        cbxFuncionario = new javax.swing.JComboBox<>();
-        txtCusto = new javax.swing.JTextField();
+        cbxCliente = new javax.swing.JComboBox<>();
+        cbxEstado = new javax.swing.JComboBox<>();
+        txtPreco = new javax.swing.JTextField();
         lblFiltrar = new javax.swing.JLabel();
 
         tblMain.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,15 +105,15 @@ public class ProcessosGUI extends javax.swing.JPanel {
             }
         });
 
-        lblProcessos.setText("Processo");
-
         lblServico.setText("Serviço");
 
-        lblFuncionario.setText("Funcionario");
+        lblCliente.setText("Cliente");
 
-        lblDescricao.setText("Descricao");
+        lblDescricao.setText("Descrição");
 
-        lblCusto.setText("Custo");
+        lblEstado.setText("Estado");
+
+        lblPreco.setText("Preço");
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -154,6 +143,8 @@ public class ProcessosGUI extends javax.swing.JPanel {
             }
         });
 
+        cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ABERTO", "EM_ANDAMENTO", "CONCLUIDO" }));
+
         lblFiltrar.setText("Filtrar:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -173,14 +164,10 @@ public class ProcessosGUI extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(7, 7, 7)
-                                        .addComponent(lblProcessos))
-                                    .addComponent(lblCusto)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lblFuncionario)
-                                        .addComponent(cbxFuncionario, 0, 177, Short.MAX_VALUE)
-                                        .addComponent(lblDescricao)
-                                        .addComponent(txtDescricao))
-                                    .addComponent(txtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblServico))
+                                    .addComponent(lblPreco)
+                                    .addComponent(lblDescricao)
+                                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnRegistar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,8 +175,16 @@ public class ProcessosGUI extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblServico)
-                                    .addComponent(cbxServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(lblCliente)
+                                    .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblEstado)
+                                    .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jLabelLinhasSelecionadas)
                     .addComponent(lblFiltrar))
                 .addContainerGap(14, Short.MAX_VALUE))
@@ -201,7 +196,7 @@ public class ProcessosGUI extends javax.swing.JPanel {
                 .addComponent(lblFiltrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblProcessos)
+                    .addComponent(lblServico)
                     .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,21 +205,21 @@ public class ProcessosGUI extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelLinhasSelecionadas))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblServico)
+                        .addComponent(lblCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxServicos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblFuncionario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lblDescricao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCusto)
+                        .addGap(22, 22, 22)
+                        .addComponent(lblEstado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(lblPreco)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnRegistar)
                         .addGap(18, 18, 18)
@@ -241,24 +236,24 @@ public class ProcessosGUI extends javax.swing.JPanel {
         if (tblMain.getSelectedRow() < 0)
             JOptionPane.showMessageDialog(this, "Por favor selecione um Processo.");
         else {
-            if (txtDescricao.getText().equals("") || txtCusto.getText().equals("") || cbxFuncionario.getSelectedItem().equals(null) || cbxServicos.getSelectedItem().equals(null)) {
+            if (txtDescricao.getText().equals("") || txtPreco.getText().equals("") || cbxEstado.getSelectedItem().equals(null) || cbxCliente.getSelectedItem().equals(null)) {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos.");
             } else {
                 ProcessoDTO processoDTO = new ProcessoDTO();
                 processoDTO.setId((int) tblMain.getValueAt(tblMain.getSelectedRow(), 0));
                 // sacar o id do serviço que esta na combobox
-                ServicoDTO servicoDTO = (ServicoDTO) cbxServicos.getSelectedItem();
+                ServicoDTO servicoDTO = (ServicoDTO) cbxCliente.getSelectedItem();
                 if (servicoDTO != null) {
                     processoDTO.setIdServico(servicoDTO.getId());
                 }
                 
-                UtilizadorDTO funcionarioDTO = (UtilizadorDTO) cbxFuncionario.getSelectedItem();
+                UtilizadorDTO funcionarioDTO = (UtilizadorDTO) cbxEstado.getSelectedItem();
                 if (funcionarioDTO != null) {
                     processoDTO.setIdFuncionario(funcionarioDTO.getId());
                 }
                 
                 processoDTO.setDescricao(txtDescricao.getText());
-                processoDTO.setCusto(BigDecimal.valueOf(Double.parseDouble(txtCusto.getText().replace(",", "."))));
+                processoDTO.setCusto(BigDecimal.valueOf(Double.parseDouble(txtPreco.getText().replace(",", "."))));
                 new ProcessoDAO().editarProcessoDAO(processoDTO);
                 loadDataSet();
                 clearCampos();
@@ -267,23 +262,23 @@ public class ProcessosGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
-        if (txtDescricao.getText().equals("") || txtCusto.getText().equals("") || cbxFuncionario.getSelectedItem().equals(null) || cbxServicos.getSelectedItem().equals(null)) {
+        if (txtDescricao.getText().equals("") || txtPreco.getText().equals("") || cbxEstado.getSelectedItem().equals(null) || cbxCliente.getSelectedItem().equals(null)) {
             JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos."); 
         } else {
             ProcessoDTO processoDTO = new ProcessoDTO();
             // sacar o id do serviço que esta na combobox
-            ServicoDTO servicoDTO = (ServicoDTO) cbxServicos.getSelectedItem();
+            ServicoDTO servicoDTO = (ServicoDTO) cbxCliente.getSelectedItem();
             if (servicoDTO != null) {
                 processoDTO.setIdServico(servicoDTO.getId());
             }
             
-            UtilizadorDTO funcionarioDTO = (UtilizadorDTO) cbxFuncionario.getSelectedItem();
+            UtilizadorDTO funcionarioDTO = (UtilizadorDTO) cbxEstado.getSelectedItem();
             if (funcionarioDTO != null) {
                 processoDTO.setIdFuncionario(funcionarioDTO.getId());
             }
 
             processoDTO.setDescricao(txtDescricao.getText());
-            processoDTO.setCusto(BigDecimal.valueOf(Double.parseDouble(txtCusto.getText().replace(",", "."))));
+            processoDTO.setCusto(BigDecimal.valueOf(Double.parseDouble(txtPreco.getText().replace(",", "."))));
             new ProcessoDAO().registarProcessoDAO(processoDTO);
             loadDataSet();
             clearCampos();
@@ -317,24 +312,18 @@ public class ProcessosGUI extends javax.swing.JPanel {
             val[i] = tblMain.getValueAt(linha, i);
         }
         
-        // Escolhe o serviço do processo selecionado na cbxServicos
-        for (int i = 0; i < cbxServicos.getItemCount(); i++) {
-            ServicoDTO servicoDTO = cbxServicos.getItemAt(i);
-            if (servicoDTO.getDescricao().equals(val[1].toString())) {
-                cbxServicos.setSelectedItem(servicoDTO);
+        // Escolhe o cliente do servico selecionado na cbxCliente
+        for (int i = 0; i < cbxCliente.getItemCount(); i++) {
+            ClienteDTO clienteDTO = cbxCliente.getItemAt(i);
+            if (clienteDTO.getNome().equals(val[1].toString())) {
+                cbxCliente.setSelectedItem(clienteDTO);
                 break;
             }
         }
-        // Escolhe o funcionario do processo selecionado na cbxFuncionarios
-        for (int i = 0; i < cbxFuncionario.getItemCount(); i++) {
-            UtilizadorDTO utilizadorDTO = cbxFuncionario.getItemAt(i);
-            if (utilizadorDTO.getNome().equals(val[2].toString())) {
-                cbxFuncionario.setSelectedItem(utilizadorDTO);
-                break;
-            }
-        }
-        txtDescricao.setText(val[3].toString());
-        txtCusto.setText(val[4].toString());
+        
+        txtDescricao.setText(val[2].toString());
+        cbxEstado.setSelectedItem(val[3].toString().toUpperCase().replace(" ", "_").replace("Í", "I"));
+        txtPreco.setText(val[4].toString());
     }//GEN-LAST:event_tblMainMouseClicked
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -353,19 +342,19 @@ public class ProcessosGUI extends javax.swing.JPanel {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnRegistar;
-    private javax.swing.JComboBox<UtilizadorDTO> cbxFuncionario;
-    private javax.swing.JComboBox<ServicoDTO> cbxServicos;
+    private javax.swing.JComboBox<ClienteDTO> cbxCliente;
+    private javax.swing.JComboBox<String> cbxEstado;
     private javax.swing.JLabel jLabelLinhasSelecionadas;
     private javax.swing.JScrollPane jScrollPaneMain;
-    private javax.swing.JLabel lblCusto;
+    private javax.swing.JLabel lblCliente;
     private javax.swing.JLabel lblDescricao;
+    private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblFiltrar;
-    private javax.swing.JLabel lblFuncionario;
-    private javax.swing.JLabel lblProcessos;
+    private javax.swing.JLabel lblPreco;
     private javax.swing.JLabel lblServico;
     private javax.swing.JTable tblMain;
-    private javax.swing.JTextField txtCusto;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtFiltrar;
+    private javax.swing.JTextField txtPreco;
     // End of variables declaration//GEN-END:variables
 }
