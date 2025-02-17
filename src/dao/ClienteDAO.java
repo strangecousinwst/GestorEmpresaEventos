@@ -44,7 +44,6 @@ public class ClienteDAO {
      * Método para registar um Cliente na base de dados.
      * 
      * @param clienteDTO Cliente para registar.
-     * @return
      */
     public void registarClienteDAO(ClienteDTO clienteDTO) {
         String query = "INSERT INTO cliente (nome, email, telemovel, localidade) "
@@ -56,7 +55,9 @@ public class ClienteDAO {
             prepStatement.setString(3, clienteDTO.getTelemovel());
             prepStatement.setString(4, clienteDTO.getLocalidade());
             prepStatement.executeUpdate();
+            System.out.println("DAO: Cliente registado.");
         } catch (SQLException e) {
+            System.out.println("DAO: Erro ao registar cliente");
             e.printStackTrace();
         }
     }
@@ -64,7 +65,6 @@ public class ClienteDAO {
     /**
      * Método para editar um Cliente na base de dados
      * @param clienteDTO Cliente para editar.
-     * @return
      */
     public void editarClienteDAO(ClienteDTO clienteDTO) {
         String query = "UPDATE cliente SET nome=?, email=?, telemovel=?, localidade=? "
@@ -77,7 +77,9 @@ public class ClienteDAO {
             prepStatement.setString(4, clienteDTO.getLocalidade());
             prepStatement.setInt(5, clienteDTO.getId());
             prepStatement.executeUpdate();
+            System.out.println("DAO: Cliente editado.");
         } catch (SQLException e) {
+            System.out.println("DAO: Erro ao editar cliente.");
             e.printStackTrace();
         }
     }
@@ -93,7 +95,9 @@ public class ClienteDAO {
             prepStatement = conn.prepareStatement(query);
             prepStatement.setInt(1, id);
             prepStatement.executeUpdate();
+            System.out.println("DAO: Cliente removido.");
         } catch (SQLException e) {
+            System.out.println("DAO: Erro ao remover cliente.");
             e.printStackTrace();
         }
     }

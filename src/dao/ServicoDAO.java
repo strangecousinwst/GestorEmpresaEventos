@@ -46,8 +46,7 @@ public class ServicoDAO {
     /**
      * Método para registar um Serviço na base de dados.
      * 
-     * @param processoDTO Serviço para registar.
-     * @return
+     * @param servicoDTO
      */
     public void registarServicoDAO(ServicoDTO servicoDTO) {
         String query = "INSERT INTO servico (id_cliente, descricao, estado, preco) "
@@ -60,15 +59,16 @@ public class ServicoDAO {
                     .toLowerCase().replace("i", "í").replace("_", " "));
             prepStatement.setBigDecimal(4, servicoDTO.getPreco());
             prepStatement.executeUpdate();
+            System.out.println("DAO: Serviço registado.");
         } catch (SQLException e) {
+            System.out.println("DAO: Erro ao registar serviço.");
             e.printStackTrace();
         }
     }
     
     /**
      * Método para editar um Serviço na base de dados
-     * @param processoDTO Cliente para editar.
-     * @return
+     * @param servicoDTO
      */
     public void editarServicoDAO(ServicoDTO servicoDTO) {
         String query = "UPDATE servico SET id_cliente=?, descricao=?, estado=?, preco=? "
@@ -81,7 +81,9 @@ public class ServicoDAO {
             prepStatement.setBigDecimal(4, servicoDTO.getPreco());
             prepStatement.setInt(5, servicoDTO.getId());
             prepStatement.executeUpdate();
+            System.out.println("DAO: Serviço editado.");
         } catch (SQLException e) {
+            System.out.println("DAO: Erro ao editar serviço.");
             e.printStackTrace();
         }
     }
@@ -96,7 +98,9 @@ public class ServicoDAO {
             prepStatement = conn.prepareStatement(query);
             prepStatement.setInt(1, id);
             prepStatement.executeUpdate();
+            System.out.println("DAO: Serviço removido.");
         } catch (SQLException e) {
+            System.out.println("DAO: Erro ao remover serviço.");
             e.printStackTrace();
         }
     }
@@ -119,7 +123,6 @@ public class ServicoDAO {
                     + "%' OR servico.criado_em LIKE '%" + searchText
                     + "%' OR servico.atualizado_em LIKE '%" + searchText
                     + "%' ORDER BY servico.id";
-            System.out.println(query);
             resultSet = statement.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -173,8 +176,9 @@ public class ServicoDAO {
     
     /**
      * Método para procurar entre todos os Processos numa tabela, dado uma string.
-     * @param searchText Palavra a procurar.
+     * @param resultSet
      * @return O resultado de um query SQL em que algum dos campos contenha o searchText.
+     * @throws java.sql.SQLException
      */
     public DefaultTableModel buildTableModel(ResultSet resultSet) throws SQLException {
         ResultSetMetaData metaData = resultSet.getMetaData();
@@ -197,5 +201,4 @@ public class ServicoDAO {
         }
         return new DefaultTableModel(data, columnNames);
     }
-
 }

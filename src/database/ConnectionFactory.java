@@ -7,7 +7,8 @@ import java.sql.SQLException;
 
 
 /**
- *
+ * Esta classe estabelecer ligação para várias bases de dados
+ * 
  * @author joao
  */
 public class ConnectionFactory {
@@ -28,13 +29,19 @@ public class ConnectionFactory {
     private static final String LOCAL_PASSWORD = "123";
     private static final String LOCAL_URL = "jdbc:mysql://" + LOCAL_SERVER + ":3306/" + DB_NAME;
     
-    // SQLITE
+    // SQLITE (PLACEHOLDER: Ainda em faze de testes, não foi implementado)
     private static final String SQLITE_DRIVER = "org.sqlite.JDBC";
     private static final String SQLITE_URL = "jdbc:sqlite:database/" + DB_NAME + ".db";
     
     // Ligacao 
     private static DatabaseType currentType = DatabaseType.MYSQL_REMOTE;
 
+    /**
+     * Método que tenta estabelecer uma ligação numa das bases de dados
+     * definidas na variavel DatabaseType.
+     * 
+     * @return
+     */
     public Connection getConn() {
         try {
             switch (currentType) {
@@ -52,7 +59,10 @@ public class ConnectionFactory {
             return null;
         }
     }
-
+    
+    /**
+     * Método obter uma ligação MySQL. 
+     */
     private Connection getMySQLConnection(String url, String username, String password) throws SQLException {
         try {
             Class.forName(MYSQL_DRIVER);
@@ -62,6 +72,9 @@ public class ConnectionFactory {
         }
     }
 
+    /**
+     * Método obter uma ligação SQLite.
+     */
     private Connection getSQLiteConnection() throws SQLException {
         try {
             Class.forName(SQLITE_DRIVER);
@@ -70,10 +83,16 @@ public class ConnectionFactory {
             throw new SQLException("SQLite driver not found", e);
         }
     }
-    
-    // Method to change database type
+
+    /**
+     * Método set genérico para definir o tipo da base de dados.
+     * @param type
+     */
     public static void setDatabaseType(DatabaseType type) { currentType = type; }
-    
-    // Method to get current database type
+
+    /**
+     * Método get genérico para obter o tipo da base de dados.
+     * @return
+     */
     public static DatabaseType getCurrentType() { return currentType; }
 }

@@ -45,7 +45,6 @@ public class ProcessoDAO {
      * Método para registar um Processo na base de dados.
      * 
      * @param processoDTO Processo para registar.
-     * @return
      */
     public void registarProcessoDAO(ProcessoDTO processoDTO) {
         String query = "INSERT INTO processo (id_servico, id_funcionario, "
@@ -57,7 +56,9 @@ public class ProcessoDAO {
             prepStatement.setString(3, processoDTO.getDescricao());
             prepStatement.setBigDecimal(4, processoDTO.getCusto());
             prepStatement.executeUpdate();
+            System.out.println("DAO: Processo registado.");
         } catch (SQLException e) {
+            System.out.println("DAO: Erro ao registar processo.");
             e.printStackTrace();
         }
     }
@@ -65,7 +66,6 @@ public class ProcessoDAO {
     /**
      * Método para editar um Processo na base de dados
      * @param processoDTO Cliente para editar.
-     * @return
      */
     public void editarProcessoDAO(ProcessoDTO processoDTO) {
         String query = "UPDATE processo SET id_servico=?, id_funcionario=?, "
@@ -78,8 +78,10 @@ public class ProcessoDAO {
             prepStatement.setBigDecimal(4, processoDTO.getCusto());
             prepStatement.setInt(5, processoDTO.getId());
             prepStatement.executeUpdate();
+            System.out.println("DAO: Processo editado.");
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("DAO: Erro ao editar processo.");
         }
     }
 
@@ -93,7 +95,9 @@ public class ProcessoDAO {
             prepStatement = conn.prepareStatement(query);
             prepStatement.setInt(1, id);
             prepStatement.executeUpdate();
+            System.out.println("DAO: Processo removido.");
         } catch (SQLException e) {
+            System.out.println("DAO: Erro ao remover processo.");
             e.printStackTrace();
         }
     }
