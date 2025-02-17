@@ -109,7 +109,6 @@
                               <Component id="txtPreco" alignment="1" min="-2" pref="96" max="-2" attributes="0"/>
                               <Component id="btnRegistar" alignment="1" min="-2" pref="84" max="-2" attributes="0"/>
                               <Component id="btnEditar" alignment="1" min="-2" pref="84" max="-2" attributes="0"/>
-                              <Component id="btnApagar" alignment="1" min="-2" pref="84" max="-2" attributes="0"/>
                               <Component id="btnCancelar" alignment="1" min="-2" pref="84" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -143,9 +142,7 @@
                   <Component id="btnRegistar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnApagar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                   <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="46" max="32767" attributes="0"/>
               </Group>
@@ -221,14 +218,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnApagar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Apagar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnApagarActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCancelar">

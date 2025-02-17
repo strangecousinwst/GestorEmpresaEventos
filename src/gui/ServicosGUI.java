@@ -109,7 +109,6 @@ public class ServicosGUI extends javax.swing.JPanel {
         txtPreco = new javax.swing.JTextField();
         btnRegistar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
-        btnApagar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
         tblMain.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -153,13 +152,6 @@ public class ServicosGUI extends javax.swing.JPanel {
             }
         });
 
-        btnApagar.setText("Apagar");
-        btnApagar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnApagarActionPerformed(evt);
-            }
-        });
-
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -191,7 +183,6 @@ public class ServicosGUI extends javax.swing.JPanel {
                             .addComponent(txtPreco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnRegistar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnApagar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -220,9 +211,7 @@ public class ServicosGUI extends javax.swing.JPanel {
                 .addComponent(btnRegistar)
                 .addGap(18, 18, 18)
                 .addComponent(btnEditar)
-                .addGap(18, 18, 18)
-                .addComponent(btnApagar)
-                .addGap(18, 18, 18)
+                .addGap(59, 59, 59)
                 .addComponent(btnCancelar)
                 .addContainerGap(46, Short.MAX_VALUE))
         );
@@ -305,24 +294,6 @@ public class ServicosGUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnRegistarActionPerformed
 
-    private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
-        if (tblMain.getSelectedRow()<0) {
-            JOptionPane.showMessageDialog(null, "Por favor selecione um Serviço.");
-        } else{
-            int opt = JOptionPane.showConfirmDialog(
-                    null,
-                    "Tem a certeza que deseja remover este Serviço?",
-                    "Confirmation",
-                    JOptionPane.YES_NO_OPTION);
-            if(opt==JOptionPane.YES_OPTION) {
-                new ServicoDAO().removerServicoDAO((int)(tblMain.getValueAt(
-                        tblMain.getSelectedRow(), 0)));
-                loadDataSet();
-                clearCampos(); 
-            }
-        }
-    }//GEN-LAST:event_btnApagarActionPerformed
-
     private void tblMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMainMouseClicked
         int linha = tblMain.getSelectedRow();
         int coluna = tblMain.getColumnCount();
@@ -354,7 +325,6 @@ public class ServicosGUI extends javax.swing.JPanel {
     }//GEN-LAST:event_txtFiltrarKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnApagar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnRegistar;

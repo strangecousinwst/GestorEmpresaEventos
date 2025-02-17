@@ -273,6 +273,11 @@ public class UtilizadoresGUI extends javax.swing.JPanel {
             utilizadorDTO.setEmail(txtEmail.getText());
             utilizadorDTO.setPassword(txtPassword.getText());
             utilizadorDTO.setTipoUtilizador(TipoUtilizador.valueOf(Objects.requireNonNull(cbxTipoUtilizador.getSelectedItem()).toString()));
+            try {
+                
+            } catch (Exception e) {
+                
+            }
             new UtilizadorDAO().registarUtilizadorDAO(utilizadorDTO);
             loadDataSet();
             clearCampos();
