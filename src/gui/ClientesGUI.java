@@ -5,6 +5,7 @@ import dto.ClienteDTO;
 
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import myutils.TableFormatter;
 
 /**
  * ClientesGUI
@@ -18,7 +19,8 @@ public class ClientesGUI extends javax.swing.JPanel {
      * Creates new form ClientesGUI
      */
     public ClientesGUI() {
-        initComponents();       
+        initComponents(); 
+        setupTable();
         loadDataSet();
     }
     
@@ -32,6 +34,10 @@ public class ClientesGUI extends javax.swing.JPanel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    private void setupTable() {
+        TableFormatter.formatTable(tblMain);
     }
 
     /**

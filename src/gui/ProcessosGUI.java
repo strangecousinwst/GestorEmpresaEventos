@@ -6,11 +6,14 @@ import dao.ServicoDAO;
 import dto.ServicoDTO;
 import dao.UtilizadorDAO;
 import dto.UtilizadorDTO;
+import myutils.TableFormatter;
+
 import java.math.BigDecimal;
 
 import java.util.List;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+
 
 /**
  * ProcessosGUI
@@ -25,6 +28,7 @@ public class ProcessosGUI extends javax.swing.JPanel {
      */
     public ProcessosGUI() {
         initComponents();
+        setupTable();
         loadDataSet();
         loadCbxFuncionarios();
         loadCbxServicos();
@@ -42,6 +46,11 @@ public class ProcessosGUI extends javax.swing.JPanel {
             ex.printStackTrace();
         }
     }
+    
+    private void setupTable() {
+        TableFormatter.formatTable(tblMain);
+    }
+    
     
     /**
      * Método que carrega informações da base de dados para uma table, dado um texto.
@@ -311,24 +320,6 @@ public class ProcessosGUI extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnRegistarActionPerformed
 
-    private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
-        if (tblMain.getSelectedRow()<0) {
-            JOptionPane.showMessageDialog(null, "Por favor selecione um Processo.");
-        } else{
-            int opt = JOptionPane.showConfirmDialog(
-                    null,
-                    "Tem a certeza que deseja remover este Processo?",
-                    "Confirmation",
-                    JOptionPane.YES_NO_OPTION);
-            if(opt==JOptionPane.YES_OPTION) {
-                new ProcessoDAO().removerProcessoDAO((int)(tblMain.getValueAt(
-                        tblMain.getSelectedRow(), 0)));
-                loadDataSet();
-                clearCampos(); 
-            }
-        }
-    }//GEN-LAST:event_btnApagarActionPerformed
-
     private void tblMainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMainMouseClicked
         int linha = tblMain.getSelectedRow();
         int coluna = tblMain.getColumnCount();
@@ -365,6 +356,24 @@ public class ProcessosGUI extends javax.swing.JPanel {
         String texto = txtFiltrar.getText();
         loadSearchData(texto);
     }//GEN-LAST:event_txtFiltrarKeyReleased
+
+    private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
+        if (tblMain.getSelectedRow()<0) {
+            JOptionPane.showMessageDialog(null, "Por favor selecione um Processo.");
+        } else{
+            int opt = JOptionPane.showConfirmDialog(
+                null,
+                "Tem a certeza que deseja remover este Processo?",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION);
+            if(opt==JOptionPane.YES_OPTION) {
+                new ProcessoDAO().removerProcessoDAO((int)(tblMain.getValueAt(
+                    tblMain.getSelectedRow(), 0)));
+        loadDataSet();
+        clearCampos();
+        }
+        }
+    }//GEN-LAST:event_btnApagarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

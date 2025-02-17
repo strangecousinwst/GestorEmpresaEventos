@@ -7,6 +7,7 @@ import enums.TipoUtilizador;
 import java.sql.SQLException;
 import java.util.Objects;
 import javax.swing.JOptionPane;
+import myutils.TableFormatter;
 
 /**
  * UtilizadoresGUI
@@ -21,6 +22,7 @@ public class UtilizadoresGUI extends javax.swing.JPanel {
      */
     public UtilizadoresGUI() {
         initComponents();
+        setupTable();
         loadDataSet();
         clearCampos();
     }
@@ -35,6 +37,10 @@ public class UtilizadoresGUI extends javax.swing.JPanel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    private void setupTable() {
+        TableFormatter.formatTable(tblMain);
     }
     
     /**

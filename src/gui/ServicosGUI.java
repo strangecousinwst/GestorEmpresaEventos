@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 import javax.swing.JOptionPane;
+import myutils.TableFormatter;
 
 /**
  * ServicosGUI
@@ -26,6 +27,7 @@ public class ServicosGUI extends javax.swing.JPanel {
      */
     public ServicosGUI() {
         initComponents();
+        setupTable();
         loadDataSet();
         loadCbxClientes();
         clearCampos();
@@ -41,6 +43,10 @@ public class ServicosGUI extends javax.swing.JPanel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    private void setupTable() {
+        TableFormatter.formatTable(tblMain);
     }
     
     /**
