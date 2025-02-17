@@ -20,45 +20,21 @@
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtFiltrar" min="-2" pref="186" max="-2" attributes="0"/>
-                          <Component id="jScrollPaneMain" min="-2" pref="720" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="lblFiltrar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                                      <Component id="lblProcessos" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="lblCusto" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="lblFuncionario" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cbxFuncionario" pref="177" max="32767" attributes="0"/>
-                                      <Component id="lblDescricao" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txtDescricao" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="txtCusto" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
-                                  <Component id="btnRegistar" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
-                                  <Component id="btnEditar" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
-                                  <Component id="btnApagar" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
-                                  <Component id="btnCancelar" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="txtFiltrar" min="-2" pref="186" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblServico" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbxServicos" min="-2" pref="184" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="jScrollPaneMain" pref="728" max="32767" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanelProcesso" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jLabelLinhasSelecionadas" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblFiltrar" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="14" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -68,44 +44,15 @@
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Component id="lblFiltrar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="lblProcessos" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtFiltrar" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jScrollPaneMain" min="-2" pref="407" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabelLinhasSelecionadas" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtFiltrar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <Component id="jScrollPaneMain" min="-2" pref="457" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="lblServico" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cbxServicos" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lblFuncionario" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cbxFuncionario" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lblDescricao" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtDescricao" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="lblCusto" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtCusto" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnRegistar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnApagar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jPanelProcesso" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="12" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -125,101 +72,163 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabelLinhasSelecionadas">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="x de y linhas selecionadas."/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="txtFiltrar">
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFiltrarKeyReleased"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblProcessos">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Processo"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblServico">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Servi&#xe7;o"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblFuncionario">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Funcionario"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblDescricao">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Descricao"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblCusto">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Custo"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtDescricao">
-    </Component>
-    <Component class="javax.swing.JButton" name="btnCancelar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Cancelar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnEditar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Editar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnRegistar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Registar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistarActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnApagar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Apagar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnApagarActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbxServicos">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;ServicoDTO&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cbxFuncionario">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;UtilizadorDTO&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtCusto">
     </Component>
     <Component class="javax.swing.JLabel" name="lblFiltrar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Filtrar:"/>
       </Properties>
     </Component>
+    <Container class="javax.swing.JPanel" name="jPanelProcesso">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lblProcessos" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="btnCancelar" min="-2" pref="84" max="-2" attributes="0"/>
+                      <Component id="btnApagar" min="-2" pref="84" max="-2" attributes="0"/>
+                      <Component id="btnEditar" min="-2" pref="84" max="-2" attributes="0"/>
+                      <Component id="btnRegistar" min="-2" pref="84" max="-2" attributes="0"/>
+                      <Component id="txtCusto" min="-2" pref="96" max="-2" attributes="0"/>
+                      <Component id="lblCusto" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDescricao" min="-2" pref="183" max="-2" attributes="0"/>
+                      <Component id="lblDescricao" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbxFuncionario" min="-2" pref="184" max="-2" attributes="0"/>
+                      <Component id="lblFuncionario" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbxServicos" min="-2" pref="184" max="-2" attributes="0"/>
+                      <Component id="lblServico" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lblProcessos" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="lblServico" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="cbxServicos" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="lblFuncionario" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="cbxFuncionario" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="lblDescricao" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtDescricao" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="lblCusto" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="txtCusto" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnRegistar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnApagar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblProcessos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Processo"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblServico">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Servi&#xe7;o"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbxServicos">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;ServicoDTO&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblFuncionario">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Funcionario"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbxFuncionario">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;UtilizadorDTO&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblDescricao">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Descricao"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtDescricao">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblCusto">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Custo"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtCusto">
+        </Component>
+        <Component class="javax.swing.JButton" name="btnRegistar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Registar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnEditar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Editar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnApagar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Apagar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnApagarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnCancelar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cancelar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

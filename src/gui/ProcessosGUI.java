@@ -100,22 +100,22 @@ public class ProcessosGUI extends javax.swing.JPanel {
 
         jScrollPaneMain = new javax.swing.JScrollPane();
         tblMain = new javax.swing.JTable();
-        jLabelLinhasSelecionadas = new javax.swing.JLabel();
         txtFiltrar = new javax.swing.JTextField();
+        lblFiltrar = new javax.swing.JLabel();
+        jPanelProcesso = new javax.swing.JPanel();
         lblProcessos = new javax.swing.JLabel();
         lblServico = new javax.swing.JLabel();
-        lblFuncionario = new javax.swing.JLabel();
-        lblDescricao = new javax.swing.JLabel();
-        lblCusto = new javax.swing.JLabel();
-        txtDescricao = new javax.swing.JTextField();
-        btnCancelar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnRegistar = new javax.swing.JButton();
-        btnApagar = new javax.swing.JButton();
         cbxServicos = new javax.swing.JComboBox<>();
+        lblFuncionario = new javax.swing.JLabel();
         cbxFuncionario = new javax.swing.JComboBox<>();
+        lblDescricao = new javax.swing.JLabel();
+        txtDescricao = new javax.swing.JTextField();
+        lblCusto = new javax.swing.JLabel();
         txtCusto = new javax.swing.JTextField();
-        lblFiltrar = new javax.swing.JLabel();
+        btnRegistar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnApagar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         tblMain.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -124,13 +124,13 @@ public class ProcessosGUI extends javax.swing.JPanel {
         });
         jScrollPaneMain.setViewportView(tblMain);
 
-        jLabelLinhasSelecionadas.setText("x de y linhas selecionadas.");
-
         txtFiltrar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtFiltrarKeyReleased(evt);
             }
         });
+
+        lblFiltrar.setText("Filtrar:");
 
         lblProcessos.setText("Processo");
 
@@ -142,10 +142,10 @@ public class ProcessosGUI extends javax.swing.JPanel {
 
         lblCusto.setText("Custo");
 
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistar.setText("Registar");
+        btnRegistar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                btnRegistarActionPerformed(evt);
             }
         });
 
@@ -156,13 +156,6 @@ public class ProcessosGUI extends javax.swing.JPanel {
             }
         });
 
-        btnRegistar.setText("Registar");
-        btnRegistar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistarActionPerformed(evt);
-            }
-        });
-
         btnApagar.setText("Apagar");
         btnApagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,7 +163,69 @@ public class ProcessosGUI extends javax.swing.JPanel {
             }
         });
 
-        lblFiltrar.setText("Filtrar:");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelProcessoLayout = new javax.swing.GroupLayout(jPanelProcesso);
+        jPanelProcesso.setLayout(jPanelProcessoLayout);
+        jPanelProcessoLayout.setHorizontalGroup(
+            jPanelProcessoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelProcessoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblProcessos)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelProcessoLayout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(jPanelProcessoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegistar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCusto)
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDescricao)
+                    .addComponent(cbxFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFuncionario)
+                    .addComponent(cbxServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblServico))
+                .addGap(15, 15, 15))
+        );
+        jPanelProcessoLayout.setVerticalGroup(
+            jPanelProcessoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelProcessoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblProcessos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblServico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxServicos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblFuncionario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblDescricao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblCusto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnRegistar)
+                .addGap(18, 18, 18)
+                .addComponent(btnEditar)
+                .addGap(18, 18, 18)
+                .addComponent(btnApagar)
+                .addGap(18, 18, 18)
+                .addComponent(btnCancelar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -180,35 +235,16 @@ public class ProcessosGUI extends javax.swing.JPanel {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblFiltrar)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(7, 7, 7)
-                                        .addComponent(lblProcessos))
-                                    .addComponent(lblCusto)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(lblFuncionario)
-                                        .addComponent(cbxFuncionario, 0, 177, Short.MAX_VALUE)
-                                        .addComponent(lblDescricao)
-                                        .addComponent(txtDescricao))
-                                    .addComponent(txtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnRegistar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblServico)
-                                    .addComponent(cbxServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(jLabelLinhasSelecionadas)
-                    .addComponent(lblFiltrar))
-                .addContainerGap(14, Short.MAX_VALUE))
+                                .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPaneMain, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanelProcesso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,40 +252,13 @@ public class ProcessosGUI extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addComponent(lblFiltrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblProcessos)
-                    .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelLinhasSelecionadas))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblServico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxServicos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblFuncionario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblDescricao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCusto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRegistar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEditar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnApagar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))
+                    .addComponent(jPanelProcesso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -365,7 +374,7 @@ public class ProcessosGUI extends javax.swing.JPanel {
     private javax.swing.JButton btnRegistar;
     private javax.swing.JComboBox<UtilizadorDTO> cbxFuncionario;
     private javax.swing.JComboBox<ServicoDTO> cbxServicos;
-    private javax.swing.JLabel jLabelLinhasSelecionadas;
+    private javax.swing.JPanel jPanelProcesso;
     private javax.swing.JScrollPane jScrollPaneMain;
     private javax.swing.JLabel lblCusto;
     private javax.swing.JLabel lblDescricao;

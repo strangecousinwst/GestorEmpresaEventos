@@ -89,22 +89,22 @@ public class ServicosGUI extends javax.swing.JPanel {
 
         jScrollPaneMain = new javax.swing.JScrollPane();
         tblMain = new javax.swing.JTable();
-        jLabelLinhasSelecionadas = new javax.swing.JLabel();
         txtFiltrar = new javax.swing.JTextField();
+        lblFiltrar = new javax.swing.JLabel();
+        jPanelServico = new javax.swing.JPanel();
         lblServico = new javax.swing.JLabel();
+        cbxCliente = new javax.swing.JComboBox<>();
         lblCliente = new javax.swing.JLabel();
+        txtDescricao = new javax.swing.JTextField();
         lblDescricao = new javax.swing.JLabel();
+        cbxEstado = new javax.swing.JComboBox<>();
         lblEstado = new javax.swing.JLabel();
         lblPreco = new javax.swing.JLabel();
-        txtDescricao = new javax.swing.JTextField();
-        btnCancelar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnRegistar = new javax.swing.JButton();
-        btnApagar = new javax.swing.JButton();
-        cbxCliente = new javax.swing.JComboBox<>();
-        cbxEstado = new javax.swing.JComboBox<>();
         txtPreco = new javax.swing.JTextField();
-        lblFiltrar = new javax.swing.JLabel();
+        btnRegistar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnApagar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         tblMain.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -113,13 +113,13 @@ public class ServicosGUI extends javax.swing.JPanel {
         });
         jScrollPaneMain.setViewportView(tblMain);
 
-        jLabelLinhasSelecionadas.setText("x de y linhas selecionadas.");
-
         txtFiltrar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtFiltrarKeyReleased(evt);
             }
         });
+
+        lblFiltrar.setText("Filtrar:");
 
         lblServico.setText("Serviço");
 
@@ -127,14 +127,16 @@ public class ServicosGUI extends javax.swing.JPanel {
 
         lblDescricao.setText("Descrição");
 
+        cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ABERTO", "SEGUIMENTO", "CONCLUIDO", "CANCELADO" }));
+
         lblEstado.setText("Estado");
 
         lblPreco.setText("Preço");
 
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistar.setText("Registar");
+        btnRegistar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                btnRegistarActionPerformed(evt);
             }
         });
 
@@ -145,13 +147,6 @@ public class ServicosGUI extends javax.swing.JPanel {
             }
         });
 
-        btnRegistar.setText("Registar");
-        btnRegistar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistarActionPerformed(evt);
-            }
-        });
-
         btnApagar.setText("Apagar");
         btnApagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,9 +154,72 @@ public class ServicosGUI extends javax.swing.JPanel {
             }
         });
 
-        cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ABERTO", "SEGUIMENTO", "CONCLUIDO", "CANCELADO" }));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
-        lblFiltrar.setText("Filtrar:");
+        javax.swing.GroupLayout jPanelServicoLayout = new javax.swing.GroupLayout(jPanelServico);
+        jPanelServico.setLayout(jPanelServicoLayout);
+        jPanelServicoLayout.setHorizontalGroup(
+            jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelServicoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelServicoLayout.createSequentialGroup()
+                        .addComponent(lblServico)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelServicoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCliente, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtDescricao, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(cbxCliente, javax.swing.GroupLayout.Alignment.TRAILING, 0, 184, Short.MAX_VALUE))
+                            .addComponent(lblDescricao, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cbxEstado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEstado, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblPreco, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtPreco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRegistar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnApagar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+        jPanelServicoLayout.setVerticalGroup(
+            jPanelServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelServicoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblServico)
+                .addGap(5, 5, 5)
+                .addComponent(lblCliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(lblDescricao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblEstado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblPreco)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnRegistar)
+                .addGap(18, 18, 18)
+                .addComponent(btnEditar)
+                .addGap(18, 18, 18)
+                .addComponent(btnApagar)
+                .addGap(18, 18, 18)
+                .addComponent(btnCancelar)
+                .addContainerGap(46, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -171,80 +229,30 @@ public class ServicosGUI extends javax.swing.JPanel {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblFiltrar)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(7, 7, 7)
-                                        .addComponent(lblServico))
-                                    .addComponent(lblPreco)
-                                    .addComponent(lblDescricao)
-                                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnRegistar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCliente)
-                                    .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblEstado)
-                                    .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(jLabelLinhasSelecionadas)
-                    .addComponent(lblFiltrar))
-                .addContainerGap(14, Short.MAX_VALUE))
+                                .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 569, Short.MAX_VALUE))
+                            .addComponent(jScrollPaneMain))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanelServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(lblFiltrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblServico)
-                    .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelLinhasSelecionadas))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lblDescricao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(lblEstado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(lblPreco)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnRegistar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEditar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnApagar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addComponent(jScrollPaneMain, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanelServico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -346,7 +354,7 @@ public class ServicosGUI extends javax.swing.JPanel {
     private javax.swing.JButton btnRegistar;
     private javax.swing.JComboBox<ClienteDTO> cbxCliente;
     private javax.swing.JComboBox<String> cbxEstado;
-    private javax.swing.JLabel jLabelLinhasSelecionadas;
+    private javax.swing.JPanel jPanelServico;
     private javax.swing.JScrollPane jScrollPaneMain;
     private javax.swing.JLabel lblCliente;
     private javax.swing.JLabel lblDescricao;
