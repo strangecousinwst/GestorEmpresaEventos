@@ -1,17 +1,9 @@
 # Gestor de Empresa
 Nesta aplicação pode gerir Serviços, Processos, Clientes e Funcionários de uma Empresa da área dos Eventos Culturais.
 
+Aplicação estruturada em 3 camadas, o utilizador interage com os GUI's, os Data Transfer Acess transferem
+ao longa da duração da aplicação, e os Data Acess Objects permitem fazer as informações relacionadas com os mesmos
+estarem ligadas a uma base de dados, remota ou local.
 
-```
-TODO    Servicos - remover passa a cancelado
-        Processos - nao possivel remover, se aconteceu aconteceu, so possivel editar
-        Cliente - remover passa a fidelizado/nao fidelizado
-        Funcionario - remover passa a ativo/nao ativo
-
-        souts - confirmacoes DAO e DOT
-        limpar - tudo
-        javadoc - tudo
-        gui - definir/alinhar
-
-        logica da cena - quem é que faz o que
-```
+Administrador pode fazer CRUDS em Utilizadores, Clientes, Processos, os serviços apenas podem ser alterados para Cancelados.
+Funcionario pode fazer CRUDS em Processos e adicionar e remover Serviços.
