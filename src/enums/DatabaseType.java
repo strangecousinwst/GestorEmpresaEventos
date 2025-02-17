@@ -1,11 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package enums;
 
 /**
- *
+ * DatabaseType
+ * Esta classe contem os Enums das diferentes bases de dados onde a aplicação pode fazer persistência da informação.
+ * 
  * @author joao
  */
 public enum DatabaseType {

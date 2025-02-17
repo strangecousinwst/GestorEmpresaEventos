@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package gui;
 
 import dto.UtilizadorDTO;
@@ -14,26 +10,28 @@ import javax.swing.JPanel;
 
 
 /**
- *
+ * HomeGUI
+ * Este JFrame é a principal janela da aplicação.
+ * 
  * @author joao
  */
-
 public class HomeGUI extends javax.swing.JFrame {
     
-
-    private CardLayout cardLayout;
-
-    private String tipoUtilizador;
-    private String email;
-    private String nome;
-    private UtilizadorDTO utilizadorDTO;
+    // Layout para os vários JPanels
+    private final CardLayout cardLayout;
+    // Propriedades do utilizador
+    private final String tipoUtilizador;
+    private final String email;
+    private final String nome;
+    private final UtilizadorDTO utilizadorDTO;
 
     /**
      * Creates new form Main
+     * @param utilizadorDTO Objeto instanciado a partir do utilizador que deu login na aplicação
+     * @throws exceptions.ExceptionDAO
      */
     public HomeGUI(UtilizadorDTO utilizadorDTO) throws ExceptionDAO {
         initComponents();
-        
         this.utilizadorDTO = utilizadorDTO;
         this.nome = utilizadorDTO.getNome();
         this.email = utilizadorDTO.getEmail();
@@ -46,6 +44,7 @@ public class HomeGUI extends javax.swing.JFrame {
         SetupFrame();
     }
     
+    // Definições do Layout do Frame
     private void SetupFrame() {        
         setTitle("Gestor Processos");
         setLocationRelativeTo(null);
@@ -55,43 +54,38 @@ public class HomeGUI extends javax.swing.JFrame {
         cardLayout.show(pnlMain, "Bem-Vindo");   
         pack();
     }
-    
+
     private void SetupCardLayout() throws ExceptionDAO {
         // pnlMain com o layout em card, permite alterar pelos varios menus
         pnlMain.setLayout(cardLayout);
-        
         // Painel Bem-Vindo
         JPanel BemVindoPanel = new BemVindoGUI(utilizadorDTO);
         BemVindoPanel.setPreferredSize(pnlMain.getPreferredSize());
         pnlMain.add("Bem-Vindo", BemVindoPanel);
-        
-        //pnlMain.add("Serviços", new Servicos());
+        //Painel Serviços
         JPanel ServicosPanel = new ServicosGUI();
         ServicosPanel.setPreferredSize(pnlMain.getPreferredSize());
         pnlMain.add("Serviços", ServicosPanel);
-        
         // Painel Processos
         JPanel ProcessosPanel = new ProcessosGUI();
         ProcessosPanel.setPreferredSize(pnlMain.getPreferredSize());
         pnlMain.add("Processos", ProcessosPanel);
-        
         // Painel Clientes
         JPanel ClientesPanel = new ClientesGUI();
         ClientesPanel.setPreferredSize(pnlMain.getPreferredSize());
         pnlMain.add("Clientes", ClientesPanel);
-        
         // Painel Utilizadores
         JPanel UtilizadoresPanel = new UtilizadoresGUI();
         UtilizadoresPanel.setPreferredSize(pnlMain.getPreferredSize());
         pnlMain.add("Utilizadores", UtilizadoresPanel);
-        
     }
     
-    // Metodo para mostar o utilizador
+    // Metodo para mostar o utilizador no JFrame
     private void getUtilizadorSessao() {
         lblUtilizador.setText("Utilizador: " + utilizadorDTO.getNome()+ " (" + tipoUtilizador + ")");
     }
     
+    // Metodo para definir o tipo do utilizador, admin/funcionario
     private void getUtilizador() {
         getUtilizadorSessao();
         if (tipoUtilizador.equals(TipoUtilizador.FUNCIONARIO.toString())) {
@@ -100,31 +94,27 @@ public class HomeGUI extends javax.swing.JFrame {
         System.out.println("Login com: " + nome + " " + email + " " + tipoUtilizador);
     }
     
+    // Metodos para chamar quando se escolher a opcao na nav bar
     private void mostrarBemVindo(){
         cardLayout.show(pnlMain, "Bem-Vindo");
         pnlOpcoes.setVisible(!pnlOpcoes.isVisible());
     }
-    
     private void mostrarServicos() {
         cardLayout.show(pnlMain, "Serviços");
         pnlOpcoes.setVisible(!pnlOpcoes.isVisible());
     }
-    
     private void mostrarProcessos() {
         cardLayout.show(pnlMain, "Processos");
         pnlOpcoes.setVisible(!pnlOpcoes.isVisible());
     }
-    
     private void mostrarClientes() {
         cardLayout.show(pnlMain, "Clientes");
         pnlOpcoes.setVisible(!pnlOpcoes.isVisible());
     }
-    
     private void mostrarUtilizadores() {
         cardLayout.show(pnlMain, "Utilizadores");
         pnlOpcoes.setVisible(!pnlOpcoes.isVisible());
     }
-    
     private void restrictFuncionario() {
         pnlOpcoes.remove(btnUtilizadores);
         pnlOpcoes.remove(btnClientes);

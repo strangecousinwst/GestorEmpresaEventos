@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- *
+ * Classe genérica para excepções com os Data Acess Objects.
  * @author joao
  */
 public class ExceptionDAO extends Exception {
@@ -11,7 +11,5 @@ public class ExceptionDAO extends Exception {
      *
      * @param msg the detail message.
      */
-    public ExceptionDAO(String msg) {
-        super(msg);
-    }
+    public ExceptionDAO(String msg) { super(msg); }
 }

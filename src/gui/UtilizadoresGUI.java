@@ -9,21 +9,25 @@ import java.util.Objects;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * UtilizadoresGUI
+ * Este JPanel contém operações sobre Utilizadores.
+ * 
  * @author joao
  */
 public class UtilizadoresGUI extends javax.swing.JPanel {
 
     /**
-     * Creates new form Utilizadores1
+     * Creates new form UtilizadoresGUI
      */
     public UtilizadoresGUI() {
         initComponents();
-        
         loadDataSet();
         clearCampos();
     }
-
+    
+    /**
+     * Método que carrega informações para uma table.
+     */
     public void loadDataSet() {
         try {
             UtilizadorDAO utilizadorDAO = new UtilizadorDAO();
@@ -33,6 +37,10 @@ public class UtilizadoresGUI extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Método que carrega informações da base de dados para uma table, dado um texto.
+     * @param texto Texto para procurar
+     */
     public void loadSearchData(String texto) {
         try {
             UtilizadorDAO utilizadorDAO = new UtilizadorDAO();
@@ -42,6 +50,9 @@ public class UtilizadoresGUI extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Método para limpar os campos de inserir inputs.
+     */
     public void clearCampos() {
         txtNome.setText("");
         txtEmail.setText("");
@@ -269,7 +280,6 @@ public class UtilizadoresGUI extends javax.swing.JPanel {
                         tblMain.getSelectedRow(), 0)));
                 loadDataSet();
                 clearCampos();
-                
             }
         }
     }//GEN-LAST:event_jButtonApagarActionPerformed
@@ -283,7 +293,6 @@ public class UtilizadoresGUI extends javax.swing.JPanel {
         int linha = tblMain.getSelectedRow();
         int coluna = tblMain.getColumnCount();
         Object[] val = new Object[coluna];
-
         for (int i = 0; i < coluna; i++) {
             val[i] = tblMain.getValueAt(linha, i);
         }

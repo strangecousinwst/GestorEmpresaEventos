@@ -5,9 +5,10 @@ import dto.UtilizadorDTO;
 
 import javax.swing.JOptionPane;
 
-
 /**
- *
+ * LoginGUI
+ * Este JFrame é onde se faz login para entrar na aplicação.
+ * 
  * @author joao
  */
 public class LoginGUI extends javax.swing.JFrame {
@@ -15,11 +16,10 @@ public class LoginGUI extends javax.swing.JFrame {
     UtilizadorDTO utilizadorDTO;
     
     /**
-     * Creates new form Logine
+     * Creates new form LoginGUI
      */
     public LoginGUI() {
         initComponents();
-        
         this.setLocationRelativeTo(null);
         utilizadorDTO = new UtilizadorDTO();
     }
@@ -102,18 +102,19 @@ public class LoginGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Tenta-se instanciar um UtilizadorDataTransferObject como resultado do método getLogin() do UtilizadorDataAcessObject.
+     */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
         String email = txtEmail.getText();
         String password = String.valueOf(passPassword.getPassword());
-        
         try {
             UtilizadorDTO utilizadorDTO = new UtilizadorDAO().getLogin(email, password);
             if (utilizadorDTO != null) {
-//                JOptionPane.showMessageDialog(null, "Credenciais Validas");
+                JOptionPane.showMessageDialog(null, "Credenciais Validas");
                 dispose();
                 new HomeGUI(utilizadorDTO);
-                // TODO abrir home
             } else {
                 JOptionPane.showMessageDialog(null, "Credenciais Inválidas");
             }
@@ -121,7 +122,6 @@ public class LoginGUI extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnLoginActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;

@@ -1,26 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package gui;
 
 import dto.UtilizadorDTO;
 
 /**
- *
+ * BemVindoGUI
+ * Este JPanel contem uma mensagem para o utilizador, serve como Home.
+ * 
  * @author joao
  */
 public class BemVindoGUI extends javax.swing.JPanel {
 
     /**
-     * Creates new form Utilizadores1
+     * Cria um novo form BemVindoGUI com um Objecto instanciado,
+     * a partir de um utilizador que deu login, 
+     * e define uma mensagem "Bem-vindo, " seguido do nome do utilizador.
+     * @param utilizadorDTO Objeto instanciado do Utilizador que deu login.
      */
     public BemVindoGUI(UtilizadorDTO utilizadorDTO) {
         initComponents();
         
         lblBemVindo.setText("Bem-vindo, " + utilizadorDTO.getNome() + ".");
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,7 +61,6 @@ public class BemVindoGUI extends javax.swing.JPanel {
                 .addContainerGap(67, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblBemVindo;

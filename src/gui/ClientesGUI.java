@@ -7,20 +7,24 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * ClientesGUI
+ * Este JPanel contém operações sobre Clientes.
+ * 
  * @author joao
  */
 public class ClientesGUI extends javax.swing.JPanel {
 
     /**
-     * Creates new form Utilizadores1
+     * Creates new form ClientesGUI
      */
     public ClientesGUI() {
-        initComponents();
-                
+        initComponents();       
         loadDataSet();
     }
     
+    /**
+     * Método que carrega informações para uma table.
+     */
     public void loadDataSet() {
         try {
             ClienteDAO clienteDAO = new ClienteDAO();
@@ -30,6 +34,10 @@ public class ClientesGUI extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Método que carrega informações da base de dados para uma table, dado um texto.
+     * @param texto Texto para procurar
+     */
     public void loadSearchData(String texto) {
         try {
             ClienteDAO clienteDAO = new ClienteDAO();
@@ -39,14 +47,15 @@ public class ClientesGUI extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Método para limpar os campos de inserir inputs.
+     */
     public void clearCampos() {
         txtNome.setText("");
         txtEmail.setText("");
         txtTelemovel.setText("");
         txtLocalidade.setText("");
     }
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -285,7 +294,6 @@ public class ClientesGUI extends javax.swing.JPanel {
         int linha = tblMain.getSelectedRow();
         int coluna = tblMain.getColumnCount();
         Object[] val = new Object[coluna];
-
         for (int i = 0; i < coluna; i++) {
             val[i] = tblMain.getValueAt(linha, i);
         }
@@ -294,7 +302,6 @@ public class ClientesGUI extends javax.swing.JPanel {
         txtTelemovel.setText(val[3].toString());
         txtLocalidade.setText(val[4].toString());
     }//GEN-LAST:event_tblMainMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApagar;

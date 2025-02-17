@@ -14,20 +14,26 @@ import java.util.Objects;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * ServicosGUI
+ * Este JPanel contém operações sobre Serviços.
+ * 
  * @author joao
  */
 public class ServicosGUI extends javax.swing.JPanel {
 
+    /**
+     * Creates new form ServicosGUI
+     */
     public ServicosGUI() {
         initComponents();
-        
         loadDataSet();
         loadCbxClientes();
         clearCampos();
-
     }
     
+    /**
+     * Método que carrega informações para uma table.
+     */
     public void loadDataSet() {
         try {
             ServicoDAO servicoDAO = new ServicoDAO();
@@ -37,6 +43,10 @@ public class ServicosGUI extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Método que carrega informações da base de dados para uma table, dado um texto.
+     * @param texto Texto para procurar
+     */
     public void loadSearchData(String texto) {
         try {
             ServicoDAO servicoDAO = new ServicoDAO();
@@ -46,6 +56,9 @@ public class ServicosGUI extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Método com ciclo foreach clientes de uma lista, para popular uma combobox
+    */
     private void loadCbxClientes() {
         ClienteDAO clienteDAO = new ClienteDAO();
         List<ClienteDTO> clientesDTO = clienteDAO.getClientesDAO();
@@ -54,6 +67,9 @@ public class ServicosGUI extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Método para limpar os campos de inserir inputs.
+     */
     public void clearCampos() {
         txtDescricao.setText("");
         txtPreco.setText("");
@@ -246,7 +262,6 @@ public class ServicosGUI extends javax.swing.JPanel {
                 if (clienteDTO != null) {
                     servicoDTO.setIdCliente(clienteDTO.getId());
                 }
-                
                 servicoDTO.setDescricao(txtDescricao.getText());
                 servicoDTO.setEstadoServico(EstadoServico.valueOf((String) cbxEstado.getSelectedItem()));
                 servicoDTO.setPreco(BigDecimal.valueOf(Double.parseDouble(txtPreco.getText().replace(",", "."))));
@@ -267,8 +282,6 @@ public class ServicosGUI extends javax.swing.JPanel {
             if (clienteDTO != null) {
                 servicoDTO.setIdCliente(clienteDTO.getId());
             }
-            
-
             servicoDTO.setDescricao(txtDescricao.getText());
             servicoDTO.setEstadoServico(EstadoServico.valueOf(Objects.requireNonNull(cbxEstado.getSelectedItem()).toString()));
             servicoDTO.setPreco(BigDecimal.valueOf(Double.parseDouble(txtPreco.getText().replace(",", "."))));
@@ -300,11 +313,9 @@ public class ServicosGUI extends javax.swing.JPanel {
         int linha = tblMain.getSelectedRow();
         int coluna = tblMain.getColumnCount();
         Object[] val = new Object[coluna];
-
         for (int i = 0; i < coluna; i++) {
             val[i] = tblMain.getValueAt(linha, i);
         }
-        
         // Escolhe o cliente do servico selecionado na cbxCliente
         for (int i = 0; i < cbxCliente.getItemCount(); i++) {
             ClienteDTO clienteDTO = cbxCliente.getItemAt(i);
@@ -312,8 +323,7 @@ public class ServicosGUI extends javax.swing.JPanel {
                 cbxCliente.setSelectedItem(clienteDTO);
                 break;
             }
-        }
-        
+        } 
         txtDescricao.setText(val[2].toString());
         cbxEstado.setSelectedItem(val[3].toString().toUpperCase().replace(" ", "_").replace("Í", "I"));
         txtPreco.setText(val[4].toString());
@@ -328,7 +338,6 @@ public class ServicosGUI extends javax.swing.JPanel {
         String texto = txtFiltrar.getText();
         loadSearchData(texto);
     }//GEN-LAST:event_txtFiltrarKeyReleased
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApagar;

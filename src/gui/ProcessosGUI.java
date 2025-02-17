@@ -8,26 +8,32 @@ import dao.UtilizadorDAO;
 import dto.UtilizadorDTO;
 import java.math.BigDecimal;
 
-
 import java.util.List;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * ProcessosGUI
+ * Este JPanel contém operações sobre Processos.
+ * 
  * @author joao
  */
 public class ProcessosGUI extends javax.swing.JPanel {
 
+    /**
+     * Creates new form ProcessosGUI
+     */
     public ProcessosGUI() {
         initComponents();
-        
         loadDataSet();
         loadCbxFuncionarios();
         loadCbxServicos();
         clearCampos();
     }
     
+    /**
+     * Método que carrega informações para uma table.
+     */
     public void loadDataSet() {
         try {
             ProcessoDAO processoDAO = new ProcessoDAO();
@@ -37,6 +43,10 @@ public class ProcessosGUI extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Método que carrega informações da base de dados para uma table, dado um texto.
+     * @param texto Texto para procurar
+     */
     public void loadSearchData(String texto) {
         try {
             ProcessoDAO processoDAO = new ProcessoDAO();
@@ -46,6 +56,9 @@ public class ProcessosGUI extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Método para limpar os campos de inserir inputs.
+     */
     public void clearCampos() {
         txtDescricao.setText("");
         txtCusto.setText("");
@@ -54,7 +67,9 @@ public class ProcessosGUI extends javax.swing.JPanel {
         cbxFuncionario.setSelectedIndex(-1);
     }
     
-    
+    /**
+     * Método com ciclo foreach funcionarios de uma lista, para popular uma combobox
+    */
     private void loadCbxFuncionarios() {
         UtilizadorDAO utilizadorDAO = new UtilizadorDAO();
         List<UtilizadorDTO> funcionariosDTO = utilizadorDAO.getFuncionariosDAO();
@@ -63,6 +78,9 @@ public class ProcessosGUI extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Método com ciclo foreach serviços de uma lista, para popular uma combobox
+    */
     private void loadCbxServicos() {
         ServicoDAO servicoDAO = new ServicoDAO();
         List<ServicoDTO> servicosDTO = servicoDAO.getAllServicosDAO();
@@ -70,7 +88,6 @@ public class ProcessosGUI extends javax.swing.JPanel {
             cbxServicos.addItem(servicoDTO);
         }
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -250,12 +267,10 @@ public class ProcessosGUI extends javax.swing.JPanel {
                 if (servicoDTO != null) {
                     processoDTO.setIdServico(servicoDTO.getId());
                 }
-                
                 UtilizadorDTO funcionarioDTO = (UtilizadorDTO) cbxFuncionario.getSelectedItem();
                 if (funcionarioDTO != null) {
                     processoDTO.setIdFuncionario(funcionarioDTO.getId());
                 }
-                
                 processoDTO.setDescricao(txtDescricao.getText());
                 processoDTO.setCusto(BigDecimal.valueOf(Double.parseDouble(txtCusto.getText().replace(",", "."))));
                 new ProcessoDAO().editarProcessoDAO(processoDTO);
@@ -275,12 +290,10 @@ public class ProcessosGUI extends javax.swing.JPanel {
             if (servicoDTO != null) {
                 processoDTO.setIdServico(servicoDTO.getId());
             }
-            
             UtilizadorDTO funcionarioDTO = (UtilizadorDTO) cbxFuncionario.getSelectedItem();
             if (funcionarioDTO != null) {
                 processoDTO.setIdFuncionario(funcionarioDTO.getId());
             }
-
             processoDTO.setDescricao(txtDescricao.getText());
             processoDTO.setCusto(BigDecimal.valueOf(Double.parseDouble(txtCusto.getText().replace(",", "."))));
             new ProcessoDAO().registarProcessoDAO(processoDTO);
@@ -311,11 +324,9 @@ public class ProcessosGUI extends javax.swing.JPanel {
         int linha = tblMain.getSelectedRow();
         int coluna = tblMain.getColumnCount();
         Object[] val = new Object[coluna];
-
         for (int i = 0; i < coluna; i++) {
             val[i] = tblMain.getValueAt(linha, i);
         }
-        
         // Escolhe o serviço do processo selecionado na cbxServicos
         for (int i = 0; i < cbxServicos.getItemCount(); i++) {
             ServicoDTO servicoDTO = cbxServicos.getItemAt(i);
