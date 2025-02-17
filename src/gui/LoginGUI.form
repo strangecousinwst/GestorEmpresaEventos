@@ -45,10 +45,8 @@
                       <Component id="passPassword" alignment="2" max="32767" attributes="0"/>
                       <Component id="txtEmail" alignment="2" min="-2" pref="190" max="-2" attributes="0"/>
                       <Component id="btnLogin" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnFechar" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnLimpar" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPassword" alignment="2" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblEmail" alignment="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtLogin" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="lblGestorEmpresa" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
@@ -61,7 +59,7 @@
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="lblGestorEmpresa" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="61" max="32767" attributes="0"/>
-                  <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtLogin" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="txtEmail" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -70,11 +68,7 @@
                   <Component id="passPassword" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnLimpar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnFechar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -88,22 +82,9 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoginActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnFechar">
+        <Component class="javax.swing.JLabel" name="txtLogin">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Fechar"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnLimpar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Limpar"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimparActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblEmail">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Email"/>
+            <Property name="text" type="java.lang.String" value="Login"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPassword">

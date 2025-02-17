@@ -33,9 +33,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
         pnlBackground = new javax.swing.JPanel();
         btnLogin = new javax.swing.JButton();
-        btnFechar = new javax.swing.JButton();
-        btnLimpar = new javax.swing.JButton();
-        lblEmail = new javax.swing.JLabel();
+        txtLogin = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         passPassword = new javax.swing.JPasswordField();
@@ -51,16 +49,7 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
 
-        btnFechar.setText("Fechar");
-
-        btnLimpar.setText("Limpar");
-        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparActionPerformed(evt);
-            }
-        });
-
-        lblEmail.setText("Email");
+        txtLogin.setText("Login");
 
         lblPassword.setText("Password");
 
@@ -76,10 +65,8 @@ public class LoginGUI extends javax.swing.JFrame {
                     .addComponent(passPassword)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLogin)
-                    .addComponent(btnFechar)
-                    .addComponent(btnLimpar)
                     .addComponent(lblPassword)
-                    .addComponent(lblEmail)
+                    .addComponent(txtLogin)
                     .addComponent(lblGestorEmpresa))
                 .addGap(132, 132, 132))
         );
@@ -89,7 +76,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addComponent(lblGestorEmpresa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addComponent(lblEmail)
+                .addComponent(txtLogin)
                 .addGap(18, 18, 18)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -98,11 +85,7 @@ public class LoginGUI extends javax.swing.JFrame {
                 .addComponent(passPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnLogin)
-                .addGap(18, 18, 18)
-                .addComponent(btnLimpar)
-                .addGap(18, 18, 18)
-                .addComponent(btnFechar)
-                .addGap(52, 52, 52))
+                .addGap(134, 134, 134))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -139,21 +122,14 @@ public class LoginGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        txtEmail.setText("");
-        passPassword.setText("");      
-    }//GEN-LAST:event_btnLimparActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnFechar;
-    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblGestorEmpresa;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JPasswordField passPassword;
     private javax.swing.JPanel pnlBackground;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JLabel txtLogin;
     // End of variables declaration//GEN-END:variables
 }

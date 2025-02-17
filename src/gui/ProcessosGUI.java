@@ -65,7 +65,7 @@ public class ProcessosGUI extends javax.swing.JPanel {
     
     private void loadCbxServicos() {
         ServicoDAO servicoDAO = new ServicoDAO();
-        List<ServicoDTO> servicosDTO = servicoDAO.getServicosDAO();
+        List<ServicoDTO> servicosDTO = servicoDAO.getAllServicosDAO();
         for (ServicoDTO servicoDTO : servicosDTO) {
             cbxServicos.addItem(servicoDTO);
         }

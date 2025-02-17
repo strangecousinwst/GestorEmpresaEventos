@@ -33,7 +33,7 @@ public class ConnectionFactory {
     private static final String SQLITE_URL = "jdbc:sqlite:database/" + DB_NAME + ".db";
     
     // Ligacao 
-    private static DatabaseType currentType = DatabaseType.MYSQL_LOCAL;
+    private static DatabaseType currentType = DatabaseType.MYSQL_REMOTE;
 
     public Connection getConn() {
         try {

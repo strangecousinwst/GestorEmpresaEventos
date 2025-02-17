@@ -17,17 +17,22 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author efapro01.24
+ * Utilizador Data Acess Object
+ * Esta classe permite fazer operações na base de dados baseadas na entidade Utilizadores.
+ * 
+ * @author joao
  */
 public class UtilizadorDAO {
     
-    Connection conn = null;
-    Statement statement = null;
-    PreparedStatement prepStatement = null;
-    ResultSet resultSet = null;
+    private Connection conn = null;
+    private Statement statement = null;
+    private PreparedStatement prepStatement = null;
+    private ResultSet resultSet = null;
     
-    // Constructor method
+    /**
+     * Método construtor, instancia uma conexão à base de dados
+     * e prepara um statement.
+     */
     public UtilizadorDAO() {
         try {
             conn = new ConnectionFactory().getConn();
@@ -37,6 +42,14 @@ public class UtilizadorDAO {
         }
     }
     
+    /**
+     * Método para determinar se o Login é ou não válido, sendo válido
+     * esse utilizador é instanciado num objeto para depois passar como argumento
+     * para o construtor do JFrame HomeGUI.
+     * @param email email/login do utilizador
+     * @param password password do utilizador
+     * @return Retorna o Data Transfer Object do respectivo Utilizador.
+     */
     public UtilizadorDTO getLogin(String email, String password) {
         UtilizadorDTO utilizadorDTO = null;
         String query = "SELECT * FROM utilizador WHERE email='"
@@ -63,6 +76,12 @@ public class UtilizadorDAO {
         return utilizadorDTO;
     }
 
+    /**
+     * Método para registar um Utilizador na base de dados.
+     * 
+     * @param utilizadorDTO Utilizador para registar.
+     * @return
+     */
     public void registarUtilizadorDAO(UtilizadorDTO utilizadorDTO) {
         try {
 
@@ -90,7 +109,11 @@ public class UtilizadorDAO {
         }
     }
 
-    // Metodo para editar utilizador
+    /**
+     * Método para editar um Utilizador na base de dados
+     * @param utilizadorDTO Utilizador para editar.
+     * @return
+     */
     public void editarUtilizadorDAO(UtilizadorDTO utilizadorDTO) {
         String query = "UPDATE utilizador SET nome=?, email=?, password=?, tipo_utilizador=? WHERE id=?";    
         try {
@@ -107,7 +130,10 @@ public class UtilizadorDAO {
         }
     }
 
-    // Metodo para remover utilizador
+    /**
+     * Método para remover um Utilizador da base de dados.
+     * @param id id do Utilizador para remover.
+     */
     public void removerUtilizadorDAO(int id) {
         String query = "DELETE FROM utilizador WHERE id=?";
         try {
@@ -120,8 +146,10 @@ public class UtilizadorDAO {
         }
     }
 
-    // Metodo que retorna um resultset de um query
-    // Usado para fazer tabelas
+    /**
+     * Método para selecionar todos os Utilizadores numa tabela.
+     * @return O resultado de um query SQL genérico, que seleciona todos.
+     */
     public ResultSet getQueryResult() {
         try {
             String query = "SELECT * FROM utilizador";
@@ -132,6 +160,10 @@ public class UtilizadorDAO {
         return resultSet;
     }
     
+    /**
+     * Query SQL para obter todos os Utilizadores que são funcionários.
+     * @return Lista de FuncionariosDTO.
+     */
     public List<UtilizadorDTO> getFuncionariosDAO() {
 
         String query = "SELECT * FROM utilizador WHERE tipo_utilizador = 'funcionario'";
@@ -145,7 +177,8 @@ public class UtilizadorDAO {
                 funcionarioDTO.setNome(resultSet.getString("nome"));
                 funcionarioDTO.setEmail(resultSet.getString("email"));
                 funcionarioDTO.setPassword(resultSet.getString("password"));
-                funcionarioDTO.setTipoUtilizador(TipoUtilizador.valueOf(resultSet.getString("tipo_utilizador").toUpperCase()));
+                funcionarioDTO.setTipoUtilizador(TipoUtilizador.valueOf(
+                        resultSet.getString("tipo_utilizador").toUpperCase()));
                 funcionariosDTO.add(funcionarioDTO);
             }
         } catch (SQLException e) {
@@ -154,9 +187,15 @@ public class UtilizadorDAO {
         return funcionariosDTO;
     }
     
+    /**
+     * Método para procurar entre todos os utilizadores numa tabela, dado uma string.
+     * @param searchText Palavra a procurar.
+     * @return O resultado de um query SQL em que algum dos campos contenha o searchText.
+     */
     public ResultSet getSearchResult(String searchText) {
         try {
-            String query = "SELECT id, nome, email, password, tipo_utilizador FROM utilizador "
+            String query = "SELECT id, nome, email, password, tipo_utilizador "
+                    + "FROM utilizador "
                     + "WHERE id LIKE '%" + searchText
                     + "%' OR nome LIKE '%" + searchText 
                     + "%' OR email LIKE '%" + searchText 
@@ -169,16 +208,19 @@ public class UtilizadorDAO {
         return resultSet;
     }
 
-    // Method to display data set in tabular form
+    /**
+     * Método para criar uma Table, dado um resultSet de um query SQL
+     * @param resultSet ResultSet de um querySQL,
+     * @return Uma Table para depois ser mostrada nos JPanels.
+     * @throws SQLException
+     */
     public DefaultTableModel buildTableModel(ResultSet resultSet) throws SQLException {
         ResultSetMetaData metaData = resultSet.getMetaData();
         int colCount = metaData.getColumnCount();
         String[] columnNames = new String[colCount];
-
         for (int col=1; col <= colCount; col++){
             columnNames[col -1] = metaData.getColumnName(col).toUpperCase();
         }
-
         List<Object[]> dataList = new ArrayList<>();
         while (resultSet.next()) {
             Object[] linha = new Object[colCount];
@@ -187,12 +229,10 @@ public class UtilizadorDAO {
             }
             dataList.add(linha);
         }
-        
         Object[][] data = new Object[dataList.size()][colCount];
         for (int i = 0; i < dataList.size(); i++) {
             data[i] = dataList.get(i);
         }
-        
         return new DefaultTableModel(data, columnNames);
     }
 }
